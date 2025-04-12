@@ -8,6 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(child: Text("Hello world", style: TextStyle(color: Colors.pink, fontWeight: FontWeight.bold)),);
