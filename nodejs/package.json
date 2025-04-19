@@ -1,0 +1,29 @@
+{
+  "name": "flutter_project_group4",
+  "version": "1.0.0",
+  "description": "Node.js for create api for flutter",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tranduyfong/Flutter_NgoNgocAnh_HUMG_Project_Group4.git"
+  },
+  "author": "Nhom 4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tranduyfong/Flutter_NgoNgocAnh_HUMG_Project_Group4/issues"
+  },
+  "homepage": "https://github.com/tranduyfong/Flutter_NgoNgocAnh_HUMG_Project_Group4#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "mysql2": "2.3.3"
+  }
+}
