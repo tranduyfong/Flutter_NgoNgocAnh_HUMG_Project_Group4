@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/screens/find.dart';
+import 'package:flutter_project_group4/screens/reading.dart';
 
 class HotWidget extends StatefulWidget {
   const HotWidget({super.key});
@@ -52,10 +54,23 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://image.nhandan.vn/Uploaded/2025/buimsbrobuyvco/2025_04_18/a1-dsc-4655-2540-908.jpg',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => ReadingNews(),
+                                            ),
+                                          );
+                                        },
+                                        child: Image.network(
+                                          fit: BoxFit.cover,
+                                          'https://image.nhandan.vn/Uploaded/2025/buimsbrobuyvco/2025_04_18/a1-dsc-4655-2540-908.jpg',
+                                          width: double.infinity,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -78,10 +93,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/4/20/batch-01-sv-2226.jpg?width=0&s=YNICSh7Jj6_xzaUHS6-FJw',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/4/20/batch-01-sv-2226.jpg?width=0&s=YNICSh7Jj6_xzaUHS6-FJw',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -104,10 +122,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://file3.qdnd.vn/data/images/0/2025/04/20/upload_2268/3.jpg?dpi=150&quality=100&w=870',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://file3.qdnd.vn/data/images/0/2025/04/20/upload_2268/3.jpg?dpi=150&quality=100&w=870',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -130,10 +151,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://cdnmedia.baotintuc.vn/Upload/ESSoZh9IeVhxwO8Bh87Q/files/2025/04/19/iran19425.jpg',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://cdnmedia.baotintuc.vn/Upload/ESSoZh9IeVhxwO8Bh87Q/files/2025/04/19/iran19425.jpg',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -156,10 +180,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://cdnmedia.baotintuc.vn/Upload/G5r0l6AdtRt8AnPUeQGMA/files/2025/04/1604/1604-trump1.jpg',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://cdnmedia.baotintuc.vn/Upload/G5r0l6AdtRt8AnPUeQGMA/files/2025/04/1604/1604-trump1.jpg',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -182,10 +209,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://cdnmedia.baotintuc.vn/Upload/OND64xLJqhpDJlQ2Gd1dpw/files/2025/04/tap-can-binh-14425d.jpg',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://cdnmedia.baotintuc.vn/Upload/OND64xLJqhpDJlQ2Gd1dpw/files/2025/04/tap-can-binh-14425d.jpg',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -208,10 +238,13 @@ class _HotWidgetState extends State<HotWidget> {
                                 children: [
                                   Expanded(
                                     flex: 4,
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      'https://file3.qdnd.vn/data/images/0/2025/04/19/upload_2268/thu%20truong%20quyet%202.jpg?dpi=150&quality=100&w=870',
-                                      width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        fit: BoxFit.cover,
+                                        'https://file3.qdnd.vn/data/images/0/2025/04/19/upload_2268/thu%20truong%20quyet%202.jpg?dpi=150&quality=100&w=870',
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -238,7 +271,7 @@ class _HotWidgetState extends State<HotWidget> {
           ],
         ),
         ListView.builder(
-          itemCount: 100,
+          itemCount: 10,
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
