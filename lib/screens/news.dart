@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/screens/find.dart';
 import 'package:flutter_project_group4/widgets/hot.dart';
+import 'package:flutter_project_group4/widgets/internationalfootball.dart';
 import 'package:flutter_project_group4/widgets/new.dart';
 import 'package:flutter_project_group4/widgets/vietnamfootball.dart';
 import 'package:intl/intl.dart';
@@ -54,18 +55,17 @@ class NewsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
+                    SizedBox(width: 5),
                     IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const FindingScreen()));
-                        },
-                        icon: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ))
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const FindingScreen(),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.search, color: Colors.white),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10),
