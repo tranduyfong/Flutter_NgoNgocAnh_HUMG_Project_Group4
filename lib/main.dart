@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:namer_app/screens/myaccount.dart';
-import 'package:namer_app/screens/trending.dart';
+import 'package:flutter_project_group4/screens/myaccount.dart';
+import 'package:flutter_project_group4/screens/trending.dart';
 import 'screens/news.dart';
 
 void main(List<String> args) {
