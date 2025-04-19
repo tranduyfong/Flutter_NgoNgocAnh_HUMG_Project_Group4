@@ -1,10 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
-require('dotenv').config();
 const port = process.env.PORT || 8888;
 const cors = require('cors');
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -25,7 +23,7 @@ const connection = mysql.createPool({
 app.get('/api/data', (req, res) => {
   connection.query('SELECT * FROM news', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
+    res.json(results)
   });
 });
 
