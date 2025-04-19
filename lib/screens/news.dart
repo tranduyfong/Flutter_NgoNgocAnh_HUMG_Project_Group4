@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/screens/find.dart';
+import 'package:flutter_project_group4/widgets/hot.dart';
 import 'package:intl/intl.dart';
-import 'package:namer_app/screens/find.dart';
-import 'package:namer_app/widgets/hot.dart';
-import 'package:namer_app/widgets/internationalfootball.dart';
-import 'package:namer_app/widgets/new.dart';
-import 'package:namer_app/widgets/vietnamfootball.dart';
 
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});
