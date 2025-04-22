@@ -21,7 +21,7 @@ const connection = mysql.createPool({
 
 // API để lấy dữ liệu
 app.get('/api/data', (req, res) => {
-  connection.query('SELECT * FROM news', (err, results) => {
+  connection.query('SELECT * FROM BaiBao', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results)
   });
