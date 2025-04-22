@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_group4/screens/find.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 
 class HotWidget extends StatefulWidget {
