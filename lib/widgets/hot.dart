@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/screens/find.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 import 'package:flutter_project_group4/models/api.dart';
 
@@ -74,7 +75,7 @@ class _HotWidgetState extends State<HotWidget> {
                                                   MaterialPageRoute(
                                                     builder:
                                                         (context) =>
-                                                            ReadingNews(),
+                                                            FindingScreen(),
                                                   ),
                                                 );
                                               },
@@ -91,161 +92,6 @@ class _HotWidgetState extends State<HotWidget> {
                                           flex: 1,
                                           child: Text(
                                             'Tổng Bí thư Tô Lâm tiếp Tổng Giám đốc Quỹ đầu tư Warburg Pincus (Hoa Kỳ)',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://static-images.vnncdn.net/vps_images_publish/000001/000003/2025/4/20/batch-01-sv-2226.jpg?width=0&s=YNICSh7Jj6_xzaUHS6-FJw',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Diễn viên Thiên Tàn qua đời đột ngột đúng ngày sinh nhật, hưởng dương 30 tuổi',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://file3.qdnd.vn/data/images/0/2025/04/20/upload_2268/3.jpg?dpi=150&quality=100&w=870',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Pháo hoa rực sáng trên bầu trời TP Hồ Chí Minh',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://cdnmedia.baotintuc.vn/Upload/ESSoZh9IeVhxwO8Bh87Q/files/2025/04/19/iran19425.jpg',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Mỹ không ủng hộ, Israel vẫn cân nhắc kế hoạch tấn công các cơ sở hạt nhân của Iran',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://cdnmedia.baotintuc.vn/Upload/G5r0l6AdtRt8AnPUeQGMA/files/2025/04/1604/1604-trump1.jpg',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Mỹ tăng thuế 245% lên hàng Trung Quốc: Căng thẳng thương mại Mỹ - Trung bùng nổ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://cdnmedia.baotintuc.vn/Upload/OND64xLJqhpDJlQ2Gd1dpw/files/2025/04/tap-can-binh-14425d.jpg',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Tổng Bí thư, Chủ tịch nước Trung Quốc Tập Cận Bình đến Hà Nội, bắt đầu chuyến thăm cấp Nhà nước tới Việt Nam',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -301,6 +147,7 @@ class _HotWidgetState extends State<HotWidget> {
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(
                         height: 125,
@@ -312,10 +159,24 @@ class _HotWidgetState extends State<HotWidget> {
                                 flex: 4,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(4),
-                                  child: Image.network(
-                                    fit: BoxFit.cover,
-                                    height: double.infinity,
-                                    data[index]['img_path'],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => ReadingNews(
+                                                idBao: data[index]['idBao']!,
+                                                imgPathLogo:
+                                                    data[index]['img_path_logo']!,
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.network(
+                                      fit: BoxFit.cover,
+                                      height: double.infinity,
+                                      data[index]['img_path'],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -323,12 +184,39 @@ class _HotWidgetState extends State<HotWidget> {
                               Expanded(
                                 flex: 7,
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      data[index]['TieuDeBao'],
-                                      style: TextStyle(fontSize: 17),
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) => ReadingNews(
+                                                  idBao: data[index]['idBao']!,
+                                                  imgPathLogo:
+                                                      data[index]['img_path_logo']!,
+                                                ),
+                                          ),
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                        padding: WidgetStateProperty.all(
+                                          EdgeInsets.zero,
+                                        ),
+                                      ),
+                                      child: Align(
+                                        // alignment: Alignment.topLeft,
+                                        child: Text(
+                                          data[index]['TieuDeBao'],
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     Row(
                                       children: [
@@ -337,7 +225,7 @@ class _HotWidgetState extends State<HotWidget> {
                                           width: 40,
                                           child: Image.network(
                                             fit: BoxFit.contain,
-                                            'https://upload.wikimedia.org/wikipedia/vi/archive/d/d7/20221117215127%21Logo-NhanDan.png',
+                                            data[index]['img_path_logo']!,
                                           ),
                                         ),
                                         Text(
