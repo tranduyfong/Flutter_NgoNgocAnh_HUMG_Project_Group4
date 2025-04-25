@@ -1,8 +1,10 @@
 const express = require('express');
+const authMiddleWare = require('../middleware/jwtMiddleware')
 const router = express.Router();
-const { getAllDatas, getNews } = require('../services/CRUDServices');
+const { getAllDatas, getNews, addNewArticleFavourite } = require('../services/CRUDServices');
 
 router.get('/', getAllDatas);
 router.get('/getNews/:idBao', getNews);
+router.post('/favourite/:idBao/like', authMiddleWare, addNewArticleFavourite);
 
 module.exports = router;

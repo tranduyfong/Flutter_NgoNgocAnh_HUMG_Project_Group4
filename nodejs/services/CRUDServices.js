@@ -13,4 +13,12 @@ const getNews = async (req, res) => {
     res.json(results);
 }
 
-module.exports = { getAllDatas, getNews }
+const addNewArticleFavourite = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idBao = req.params.idBao;
+
+    await connection.query('INSERT INTO YeuThichBaiBao VALUES (?, ?)', [idNguoiDung, idBao]);
+    res.json({ success: true });
+}
+
+module.exports = { getAllDatas, getNews, addNewArticleFavourite }
