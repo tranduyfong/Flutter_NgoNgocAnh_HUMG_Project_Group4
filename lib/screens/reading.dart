@@ -36,10 +36,9 @@ class _ReadingNews extends State<ReadingNews> {
 
   void _likeArticle(int idBao) {
     if (userIsLoggedIn) {
-      // Gửi yêu cầu like lên server
       print('Liked article: $idBao');
+      
     } else {
-      // Chuyển hướng đến màn hình đăng nhập
       Navigator.pushNamed(context, '/login', arguments: {'articleId': idBao});
     }
   }

@@ -1,43 +1,59 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Giả lập thông tin đăng nhập
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  Future<String?> loginAPI(String email, String password) async {
+    final response = await http.post(
+      Uri.parse('http://192.168.1.21:3000/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['token']; // Trả về token nếu thành công
+    } else {
+      return null; // Đăng nhập thất bại
+    }
+  }
+
   // Hàm xử lý đăng nhập
   Future<void> _login() async {
-    // Kiểm tra thông tin đăng nhập (thực tế, bạn cần gọi API ở đây)
-    if (_emailController.text == 'test@example.com' &&
-        _passwordController.text == 'password') {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    final token = await loginAPI(email, password);
+
+    if (token != null) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('isLoggedIn', true); // Lưu trạng thái đăng nhập
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('jwtToken', token);
 
-      // Lấy thông tin từ arguments để chuyển về bài báo đã like
       final Map<String, String> args =
-          ModalRoute.of(context)?.settings.arguments as Map<String, String> ??
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>? ??
           {};
-      String? articleId = args['articleId'];
 
-      Navigator.pop(context); // Quay lại trang trước (Home)
+      String? articleId = args['articleId'];
+      Navigator.of(context).pop();
       if (articleId != null) {
-        // Quay lại trang Home và thực hiện hành động like
         Navigator.pop(context);
-        // Thực hiện lại hành động like ở đây nếu cần
       }
     } else {
-      // Thông báo lỗi đăng nhập
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Đăng nhập thất bại')));
+      ).showSnackBar(SnackBar(content: Text('Email hoặc mật khẩu không đúng')));
     }
   }
 

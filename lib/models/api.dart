@@ -33,4 +33,19 @@ class DataService {
       throw Exception('Không thể tải dữ liệu');
     }
   }
+
+  Future<String> login(String email, String password) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/login'),
+      headers: {'Content_Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['token'];
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
 }

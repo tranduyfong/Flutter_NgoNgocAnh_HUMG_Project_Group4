@@ -15,4 +15,9 @@ const authMiddleWare = (req, res, next) => {
     }
 }
 
-module.exports = authMiddleWare;
+// create token login
+const tokenLogin = (payload) => {
+    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' })
+}
+
+module.exports = { authMiddleWare, tokenLogin};

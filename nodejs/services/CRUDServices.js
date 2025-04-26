@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-
+const { tokenLogin } = require('../middleware/jwtMiddleware');
 // API for get all datas
 const getAllDatas = async (req, res) => {
     let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia');
@@ -13,6 +13,7 @@ const getNews = async (req, res) => {
     res.json(results);
 }
 
+// API for do liked some article
 const addNewArticleFavourite = async (req, res) => {
     const idNguoiDung = req.user.idNguoiDung;
     const idBao = req.params.idBao;
@@ -21,4 +22,30 @@ const addNewArticleFavourite = async (req, res) => {
     res.json({ success: true });
 }
 
-module.exports = { getAllDatas, getNews, addNewArticleFavourite }
+const login = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        console.log("Login attempt:", email, password);
+
+        const [users] = await connection.query(
+            'SELECT * FROM NguoiDung WHERE Email = ? AND MatKhau = ?',
+            [email, password]
+        );
+        if (users.length === 0) {
+            return res.status(401).json({ message: 'Sai email hoặc mật khẩu' });
+        }
+        const user = users[0];
+        console.log("Found user:", user);
+
+        const token = tokenLogin({
+            idNguoiDung: user.idNguoiDung,
+            Email: user.email
+        });
+        res.json({ token });
+    } catch (error) {
+        console.error("Lỗi trong login:", error); // Log lỗi ra terminal
+        return res.status(500).json({ message: 'Lỗi server', error: error.message });
+    }
+};
+
+module.exports = { getAllDatas, getNews, addNewArticleFavourite, login }
