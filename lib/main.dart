@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/screens/LoginPage.dart';
 import 'package:flutter_project_group4/screens/myaccount.dart';
 import 'package:flutter_project_group4/screens/trending.dart';
 import 'screens/news.dart';
 
-void main(List<String> args) {
-  runApp(
-    MaterialApp(
-      home: BottomNavigationProject(),
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-    ),
-  );
+      initialRoute: '/',
+      routes: {
+        '/': (context) => BottomNavigationProject(),
+        '/login': (context) => LoginPage(),
+      },
+    );
+  }
 }
 
 class BottomNavigationProject extends StatefulWidget {

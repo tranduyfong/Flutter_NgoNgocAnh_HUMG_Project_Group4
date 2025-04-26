@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_group4/screens/find.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 import 'package:flutter_project_group4/models/api.dart';
 
@@ -71,13 +70,22 @@ class _HotWidgetState extends State<HotWidget> {
                                             ),
                                             child: GestureDetector(
                                               onTap: () {
-                                                Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                    builder:
-                                                        (context) =>
-                                                            FindingScreen(),
+                                                ScaffoldMessenger.of(
+                                                  context,
+                                                ).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Đăng nhập thất bại',
+                                                    ),
                                                   ),
                                                 );
+                                                // Navigator.of(context).push(
+                                                //   MaterialPageRoute(
+                                                //     builder:
+                                                //         (context) =>
+                                                //             FindingScreen(),
+                                                //   ),
+                                                // );
                                               },
                                               child: Image.network(
                                                 fit: BoxFit.cover,

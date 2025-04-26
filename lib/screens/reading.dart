@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_project_group4/models/api.dart';
 
 class ReadingNews extends StatefulWidget {
@@ -17,7 +18,31 @@ class ReadingNews extends StatefulWidget {
 
 class _ReadingNews extends State<ReadingNews> {
   final DataService dataService = DataService();
+  bool userIsLoggedIn = false;
   double fontSize = 24.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userIsLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    });
+  }
+
+  void _likeArticle(int idBao) {
+    if (userIsLoggedIn) {
+      // Gửi yêu cầu like lên server
+      print('Liked article: $idBao');
+    } else {
+      // Chuyển hướng đến màn hình đăng nhập
+      Navigator.pushNamed(context, '/login', arguments: {'articleId': idBao});
+    }
+  }
 
   void showDialogToChangeSizeText() {
     showModalBottomSheet(
@@ -155,6 +180,9 @@ class _ReadingNews extends State<ReadingNews> {
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () => _likeArticle(widget.idBao), 
+            icon: Icon(Icons.heart_broken)),
           Container(
             margin: EdgeInsets.only(right: 15),
             child: IconButton(
