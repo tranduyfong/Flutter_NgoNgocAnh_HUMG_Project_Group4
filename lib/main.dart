@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project_group4/screens/loginpage.dart';
 import 'package:flutter_project_group4/screens/myaccount.dart';
 import 'package:flutter_project_group4/screens/trending.dart';
@@ -7,6 +8,10 @@ import 'screens/news.dart';
 void main() {
   runApp(MyApp());
 }
+// Future main() async {
+//   await dotenv.load(fileName: "/.env");
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

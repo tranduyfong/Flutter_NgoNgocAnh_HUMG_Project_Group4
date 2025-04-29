@@ -1,5 +1,6 @@
 const connection = require('../config/database')
 const { tokenLogin } = require('../middleware/jwtMiddleware');
+
 // API for get all datas
 const getAllDatas = async (req, res) => {
     let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia');
@@ -14,7 +15,7 @@ const getNews = async (req, res) => {
 }
 
 // API for do liked some article
-const addNewArticleFavourite = async (req, res) => {
+const addArticleFavourite = async (req, res) => {
     const idNguoiDung = req.user.idNguoiDung;
     const idBao = req.params.idBao;
 
@@ -22,6 +23,15 @@ const addNewArticleFavourite = async (req, res) => {
     res.json({ success: true });
 }
 
+const deleteArticleFavourite = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idBao = req.params.idBao;
+
+    await connection.query('DELETE FROM YeuThichBaiBao WHERE idNguoiDung = ? AND idBao = ?', [idNguoiDung, idBao]);
+    res.json({ success: true });
+}
+
+// API for login
 const login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -48,4 +58,13 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { getAllDatas, getNews, addNewArticleFavourite, login }
+// API for check user have liked some article
+const checkLikedArticle = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idBao = req.params.idBao;
+
+    let [results, fields] = await connection.query('SELECT * FROM YeuThichBaiBao WHERE idNguoiDung = ? AND idBao = ?', [idNguoiDung, idBao]);
+    res.json(results);
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite }
