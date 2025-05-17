@@ -19,7 +19,6 @@ class _MyAccountScreen extends State<MyAccountScreen> {
   void initState() {
     super.initState();
     _checkLoginStatus();
-    _getDataUserName();
   }
 
   Future<void> _checkLoginStatus() async {
@@ -30,6 +29,10 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     setState(() {
       userIsLoggedIn = isLoggedIn && token != null && token.isNotEmpty;
     });
+
+    if (userIsLoggedIn) {
+      _getDataUserName(); // Chỉ gọi khi đã đăng nhập
+    }
   }
 
   Future<void> _getDataUserName() async {

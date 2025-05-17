@@ -36,7 +36,7 @@ class _TrendingScreen extends State<TrendingScreen> {
     _videoPlayerController =
         VideoPlayerController.networkUrl(
             Uri.parse(
-              'https://streaming-cms-tpo.epicdn.me/aae964e2df4fd050df7ea4f2cdbf35b1/681845d0/2025_05_04/c0049_4760.mp4',
+              'https://streaming-cms-tpo-te-vnso-tt-16.epicdn.me/a5c964ec96c8490b4435e2f82c822c77/6828c090/2025_05_17/nhin_lai_hanh_trinh_xa_loi_hn_4725.mp4',
             ),
           )
           ..addListener(() {

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://192.168.1.18:3000';
+  static final String baseUrl = 'http://172.20.10.3:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {
@@ -130,9 +130,9 @@ class DataService {
     final token = prefs.getString('jwtToken');
 
     // Check the token is invalid
-    if (token == null || token.isEmpty) {
-      throw Exception('Token khong ton tai');
-    }
+    // if (token == null || token.isEmpty) {
+    //   throw Exception('Token khong ton tai');
+    // }
 
     final response = await http.get(
       Uri.parse('$baseUrl/user/data'),
