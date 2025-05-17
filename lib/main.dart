@@ -62,7 +62,9 @@ class _BottomNavigationProject extends State<BottomNavigationProject> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
+        backgroundColor: _selectedIndex == 1 ? Colors.black : Colors.white,
       ),
     );
   }

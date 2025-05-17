@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/models/api.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReadingNews extends StatefulWidget {
@@ -23,71 +20,74 @@ class _ReadingNews extends State<ReadingNews> {
   final DataService dataService = DataService();
   bool userIsLoggedIn = false;
   double fontSize = 24.0;
-  Color heartColor = Colors.black;
+  bool isLiked = false;
 
   @override
   void initState() {
     super.initState();
     _checkLoginStatus();
+    _loadLikedStatus();
   }
 
   // The function to check logged
   Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    final token = prefs.getString('jwtToken');
+
     setState(() {
-      userIsLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+      userIsLoggedIn = isLoggedIn && token != null && token.isNotEmpty;
     });
   }
 
-  // The function to check liked article
-  Future<bool> checkLiked(int idBao) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('jwtToken');
-
-    if (token == null) {
-      throw Exception('No token found');
-    }
-
-    final response = await http.get(
-      Uri.parse('http://192.168.110.68:3000/checkLikedArticle/$idBao'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-
-      if (data is List && data.isNotEmpty) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      throw Exception('Failed to liked article');
-    }
+  void _loadLikedStatus() async {
+    bool liked = await dataService.checkLiked(widget.idBao);
+    setState(() {
+      isLiked = liked;
+    });
   }
 
   void _likeArticle(int idBao) async {
     if (userIsLoggedIn) {
-      bool isLiked = await checkLiked(idBao);
+      bool currentLiked = await dataService.checkLiked(idBao);
       if (isLiked) {
         print('Huy like');
         DataService.deleteArticleFavourite(idBao);
-        setState(() {
-          heartColor = Colors.black;
-        });
       } else {
         print('Liked article: $idBao');
         DataService.addArticleFavourite(idBao);
-        setState(() {
-          heartColor = Colors.pink;
-        });
       }
+      setState(() {
+        isLiked = !currentLiked;
+      });
     } else {
-      Navigator.pushNamed(context, '/login', arguments: {'articleId': idBao});
+      showDialogToRequestLikeArticle();
     }
+  }
+
+  void showDialogToRequestLikeArticle() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Bạn chưa đăng nhập'),
+            content: Text('Hãy đăng nhập để yêu thích bài báo'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Hủy', style: TextStyle(color: Colors.red)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text('Đăng nhập'),
+              ),
+            ],
+          ),
+    );
   }
 
   void showDialogToChangeSizeText() {
@@ -228,7 +228,10 @@ class _ReadingNews extends State<ReadingNews> {
         actions: [
           IconButton(
             onPressed: () => _likeArticle(widget.idBao),
-            icon: Icon(Icons.heart_broken, color: heartColor),
+            icon: Icon(
+              Icons.favorite,
+              color: isLiked ? Colors.pink : Colors.black,
+            ),
           ),
           Container(
             margin: EdgeInsets.only(right: 15),
