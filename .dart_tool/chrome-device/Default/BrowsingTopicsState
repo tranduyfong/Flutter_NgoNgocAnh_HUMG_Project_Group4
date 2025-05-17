@@ -13,6 +13,7 @@
       "padded_top_topics_start_index": 0,
       "taxonomy_version": 0,
       "top_topics_and_observing_domains": [  ]
+<<<<<<< HEAD
    }, {
       "calculation_time": "13391921914744500",
       "config_version": 0,
@@ -23,4 +24,9 @@
    } ],
    "hex_encoded_hmac_key": "63CA3261A1AAF9700DED7B71482E70CA15A98D25A057B6385ECDBEEEE830A596",
    "next_scheduled_calculation_time": "13392526714747192"
+=======
+   } ],
+   "hex_encoded_hmac_key": "63CA3261A1AAF9700DED7B71482E70CA15A98D25A057B6385ECDBEEEE830A596",
+   "next_scheduled_calculation_time": "13391444618658664"
+>>>>>>> de0301d (Hoan thanh mot so chuc nang)
 }

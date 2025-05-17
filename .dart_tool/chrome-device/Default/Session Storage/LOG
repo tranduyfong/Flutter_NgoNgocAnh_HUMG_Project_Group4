@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2025/05/17-09:22:07.299 5338 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\Session Storage/MANIFEST-000001
 2025/05/17-09:22:07.300 5338 Recovering log #3
 2025/05/17-09:22:07.320 5338 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\Session Storage/000003.log 
+=======
+2025/05/10-08:43:57.432 3ba0 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\Session Storage/MANIFEST-000001
+2025/05/10-08:43:57.445 3ba0 Recovering log #3
+2025/05/10-08:43:57.448 3ba0 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\Session Storage/000003.log 
+>>>>>>> de0301d (Hoan thanh mot so chuc nang)

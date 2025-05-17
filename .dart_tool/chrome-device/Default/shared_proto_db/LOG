@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 2025/05/17-09:22:07.279 2b40 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\shared_proto_db/MANIFEST-000001
 2025/05/17-09:22:07.280 2b40 Recovering log #7
 2025/05/17-09:22:07.280 2b40 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\shared_proto_db/000007.log 
 2025/05/17-09:22:07.280 2b40 Delete type=0 #3
 2025/05/17-09:22:07.280 2b40 Delete type=0 #4
+=======
+2025/05/10-08:43:57.444 4e08 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\shared_proto_db/MANIFEST-000001
+2025/05/10-08:43:57.445 4e08 Recovering log #4
+2025/05/10-08:43:57.447 4e08 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\shared_proto_db/000004.log 
+2025/05/10-08:43:57.447 4e08 Delete type=0 #3
+>>>>>>> de0301d (Hoan thanh mot so chuc nang)
