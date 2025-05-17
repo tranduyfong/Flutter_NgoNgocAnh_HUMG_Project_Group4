@@ -23,6 +23,7 @@ const addArticleFavourite = async (req, res) => {
     res.json({ success: true });
 }
 
+// API for delete some favourite article
 const deleteArticleFavourite = async (req, res) => {
     const idNguoiDung = req.user.idNguoiDung;
     const idBao = req.params.idBao;
@@ -67,4 +68,25 @@ const checkLikedArticle = async (req, res) => {
     res.json(results);
 }
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite }
+// API for get User Data
+const getUserData = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+
+    let [results, fields] = await connection.query('SELECT * FROM NguoiDung WHERE idNguoiDung = ?', [idNguoiDung]);
+    res.json(results);
+}
+
+const createAccount = async (req, res) => {
+    const { name, email, password } = req.body;
+
+    let [results, fields] = await connection.query('INSERT INTO NguoiDung(TenNguoiDung, Email, MatKhau, PhanLoaiTaiKhoan) VALUES (?, ?, ?, ?)', [name, email, password, 0]);
+    res.json({ message: 'Tạo tài khoản thành công' });
+}
+
+const checkExistAccount = async (req, res) => {
+    const email = req.params.email;
+
+    let [results, fields] = await connection.query('SELECT * FROM NguoiDung WHERE Email = ?', [email]);
+    res.json(results);
+}
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount }
