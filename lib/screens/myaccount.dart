@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyAccountScreen());
-}
-
 class MyAccountScreen extends StatelessWidget {
   const MyAccountScreen({super.key});
 
@@ -41,113 +37,111 @@ class MyAccountScreen extends StatelessWidget {
 class PersonalPage extends StatelessWidget {
   const PersonalPage({super.key});
 
-  void _showLoginDialog(BuildContext context) {
+  void _showDialog(
+    BuildContext context,
+    String title,
+    List<Widget> content,
+    List<Widget> actions,
+  ) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Đăng nhập'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(decoration: const InputDecoration(labelText: 'Email')),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Mật khẩu'),
-                obscureText: true,
-              ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  _showRegisterDialog(context);
-                },
-                child: const Text(
-                  'Bạn chưa có tài khoản? Đăng ký',
-                  style: TextStyle(
-                    color: Color(0xFF14B8A6),
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.underline,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Hủy'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Xử lý đăng nhập ở đây
-                Navigator.of(context).pop();
-              },
-              child: const Text('Đăng nhập'),
-            ),
-          ],
+          title: Text(title),
+          content: Column(mainAxisSize: MainAxisSize.min, children: content),
+          actions: actions,
         );
       },
     );
   }
 
-  void _showRegisterDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Đăng ký'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(decoration: const InputDecoration(labelText: 'Email')),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Mật khẩu'),
-                obscureText: true,
-              ),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Xác nhận mật khẩu',
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 16),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  _showLoginDialog(context);
-                },
-                child: const Text(
-                  'Bạn đã có tài khoản? Đăng nhập',
-                  style: TextStyle(
-                    color: Color(0xFF14B8A6),
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.underline,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
+  void _showLoginDialog(BuildContext context) {
+    _showDialog(
+      context,
+      'Đăng nhập',
+      [
+        TextField(decoration: const InputDecoration(labelText: 'Email')),
+        TextField(
+          decoration: const InputDecoration(labelText: 'Mật khẩu'),
+          obscureText: true,
+        ),
+        const SizedBox(height: 16),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+            _showRegisterDialog(context);
+          },
+          child: const Text(
+            'Bạn chưa có tài khoản? Đăng ký',
+            style: TextStyle(
+              color: Color(0xFF14B8A6),
+              fontWeight: FontWeight.w600,
+              decoration: TextDecoration.underline,
+              fontSize: 14,
+            ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Hủy'),
+        ),
+      ],
+      [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Hủy'),
+        ),
+        TextButton(
+          onPressed: () {
+            // Xử lý đăng nhập ở đây
+            Navigator.of(context).pop();
+          },
+          child: const Text('Đăng nhập'),
+        ),
+      ],
+    );
+  }
+
+  void _showRegisterDialog(BuildContext context) {
+    _showDialog(
+      context,
+      'Đăng ký',
+      [
+        TextField(decoration: const InputDecoration(labelText: 'Email')),
+        TextField(
+          decoration: const InputDecoration(labelText: 'Mật khẩu'),
+          obscureText: true,
+        ),
+        TextField(
+          decoration: const InputDecoration(labelText: 'Xác nhận mật khẩu'),
+          obscureText: true,
+        ),
+        const SizedBox(height: 16),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+            _showLoginDialog(context);
+          },
+          child: const Text(
+            'Bạn đã có tài khoản? Đăng nhập',
+            style: TextStyle(
+              color: Color(0xFF14B8A6),
+              fontWeight: FontWeight.w600,
+              decoration: TextDecoration.underline,
+              fontSize: 14,
             ),
-            TextButton(
-              onPressed: () {
-                // Xử lý đăng ký ở đây
-                Navigator.of(context).pop();
-              },
-              child: const Text('Đăng ký'),
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
+      [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Hủy'),
+        ),
+        TextButton(
+          onPressed: () {
+            // Xử lý đăng ký ở đây
+            Navigator.of(context).pop();
+          },
+          child: const Text('Đăng ký'),
+        ),
+      ],
     );
   }
 
@@ -210,12 +204,12 @@ class PersonalPage extends StatelessWidget {
             right: -10,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-              decoration: BoxDecoration(color: Colors.transparent),
-              child: Text(
+              decoration: const BoxDecoration(color: Colors.transparent),
+              child: const Text(
                 '39',
                 style: TextStyle(
                   fontSize: 10,
-                  color: const Color(0xFF9CA3AF),
+                  color: Color(0xFF9CA3AF),
                   fontFamily: 'Arial',
                   fontWeight: FontWeight.normal,
                 ),
@@ -253,7 +247,6 @@ class PersonalPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: ListView(
           children: [
-            // User login row
             GestureDetector(
               onTap: () => _showLoginDialog(context),
               child: Row(
@@ -285,217 +278,39 @@ class PersonalPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    _navigateToFavorites(context);
-                  },
-                  child: _IconLabel(
+                  onTap: () => _navigateToFavorites(context),
+                  child: const _IconLabel(
                     icon: Icons.bookmark,
                     label: 'Đã yêu thích',
-                    iconColor: const Color(0xFF0D9488),
+                    iconColor: Color(0xFF0D9488),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Define the action for "Đang theo dõi"
-                    print('Đang theo dõi tapped');
-                  },
-                  child: _IconLabel(
+                  onTap: () => debugPrint('Đang theo dõi tapped'),
+                  child: const _IconLabel(
                     icon: Icons.check_box,
                     label: 'Đang theo dõi',
-                    iconColor: const Color(0xFF0D9488),
+                    iconColor: Color(0xFF0D9488),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Define the action for "Tin đã tải"
-                    print('Tin đã tải tapped');
-                  },
-                  child: _IconLabel(
+                  onTap: () => debugPrint('Tin đã tải tapped'),
+                  child: const _IconLabel(
                     icon: Icons.download,
                     label: 'Tin đã tải',
-                    iconColor: const Color(0xFF0D9488),
+                    iconColor: Color(0xFF0D9488),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    // Define the action for "Đọc gần đây"
-                    print('Đọc gần đây tapped');
-                  },
-                  child: _IconLabel(
+                  onTap: () => debugPrint('Đọc gần đây tapped'),
+                  child: const _IconLabel(
                     icon: Icons.access_time,
                     label: 'Đọc gần đây',
-                    iconColor: const Color(0xFF0D9488),
+                    iconColor: Color(0xFF0D9488),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            const Divider(height: 1, color: Color(0xFFE5E7EB)),
-            const SizedBox(height: 24),
-            // CÀI ĐẶT section
-            buildSectionTitle('CÀI ĐẶT'),
-            buildIconText(Icons.menu_book_outlined, 'Chế độ đọc'),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    Icon(
-                      Icons.palette_outlined,
-                      color: Color(0xFF9CA3AF),
-                      size: 24,
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      'Giao diện',
-                      style: TextStyle(color: Color(0xFF374151), fontSize: 16),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFF0D9488),
-                      width: 2,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    Icon(
-                      Icons.record_voice_over_outlined,
-                      color: Color(0xFF9CA3AF),
-                      size: 24,
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      'Giọng đọc',
-                      style: TextStyle(color: Color(0xFF374151), fontSize: 16),
-                    ),
-                  ],
-                ),
-                const Text(
-                  'Mặc định',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    Icon(
-                      Icons.location_on_outlined,
-                      color: Color(0xFF9CA3AF),
-                      size: 24,
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      'Tin địa phương',
-                      style: TextStyle(color: Color(0xFF374151), fontSize: 16),
-                    ),
-                  ],
-                ),
-                const Text(
-                  'Chọn địa phương',
-                  style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            buildIconText(Icons.settings_outlined, 'Nâng cao'),
-            const SizedBox(height: 24),
-            const Divider(height: 1, color: Color(0xFFE5E7EB)),
-            const SizedBox(height: 24),
-            // TIỆN ÍCH section
-            buildSectionTitle('TIỆN ÍCH'),
-            buildIconText(Icons.calendar_today_outlined, 'Lịch Việt'),
-            const SizedBox(height: 20),
-            buildIconText(Icons.wb_sunny_outlined, 'Thời tiết'),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Icon(
-                      Icons.circle_outlined,
-                      color: const Color(0xFF9CA3AF),
-                      size: 24,
-                    ),
-                    const Positioned(
-                      top: -8,
-                      right: -12,
-                      child: Text(
-                        '39',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF9CA3AF),
-                          fontFamily: 'Arial',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'Kết quả xổ số',
-                  style: TextStyle(color: Color(0xFF374151), fontSize: 16),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            buildIconText(
-              Icons.monetization_on_outlined,
-              'Giá vàng & Ngoại tệ',
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Icon(
-                      Icons.circle_outlined,
-                      color: const Color(0xFF9CA3AF),
-                      size: 24,
-                    ),
-                    const Positioned(
-                      top: -8,
-                      right: -12,
-                      child: Text(
-                        '39',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF9CA3AF),
-                          fontFamily: 'Arial',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'Tỷ số bóng đá',
-                  style: TextStyle(color: Color(0xFF374151), fontSize: 16),
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -533,7 +348,6 @@ class _IconLabel extends StatelessWidget {
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 
-  // This is a placeholder for favorite articles. Replace with real data accordingly.
   final List<Map<String, String>> favoriteArticles = const [
     {
       'title': 'Bài báo yêu thích 1',
@@ -563,7 +377,7 @@ class FavoritesPage extends StatelessWidget {
               subtitle: Text(article['summary']!),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                // Thêm chức năng xem chi tiết bài báo nếu cần
+                // TODO: Handle article detail navigation if needed
               },
             ),
           );
