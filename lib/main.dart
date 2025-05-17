@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project_group4/screens/loginpage.dart';
 import 'package:flutter_project_group4/screens/myaccount.dart';
 import 'package:flutter_project_group4/screens/trending.dart';
