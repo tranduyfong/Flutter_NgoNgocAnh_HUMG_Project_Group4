@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/main.dart';
 import 'package:flutter_project_group4/models/api.dart';
+import 'package:flutter_project_group4/screens/favourites.dart';
+import 'package:flutter_project_group4/screens/listtitle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyAccountScreen extends StatefulWidget {
@@ -14,6 +16,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
   DataService dataService = DataService();
   bool userIsLoggedIn = false;
   String userName = '';
+  int isAdmin = 0; // User khi = 0 và Admin khi = 1
 
   @override
   void initState() {
@@ -21,6 +24,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     _checkLoginStatus();
   }
 
+  // Hàm kiểm tra xem đã đăng nhập hay chưa
   Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
     final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
@@ -35,14 +39,16 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     }
   }
 
+  // Hàm lấy tên người dùng
   Future<void> _getDataUserName() async {
     final data = await dataService.getUserData();
     setState(() {
       userName = data[0]['TenNguoiDung'];
+      isAdmin = data[0]['PhanLoaiTaiKhoan'];
     });
   }
 
-  // Đăng xuất
+  // Hàm để đăng xuất tài khoản
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -57,6 +63,82 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     });
   }
 
+  // Hàm trả về widget cho user hay admin
+  Widget isForAdminWidget() {
+    if (isAdmin == 1) {
+      return Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ListTitleScreens(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.list,
+                size: 30,
+                color: const Color.fromARGB(255, 52, 151, 132),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ListTitleScreens(),
+                  ),
+                );
+              },
+              child: Text(
+                'Danh sách bài báo',
+                style: TextStyle(color: const Color.fromARGB(255, 71, 71, 71)),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const FavouritesScreen(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.favorite,
+                size: 30,
+                color: const Color.fromARGB(255, 52, 151, 132),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const FavouritesScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'Đã thích',
+                style: TextStyle(color: const Color.fromARGB(255, 71, 71, 71)),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  // Hàm hiện dialog để xác nhận đăng xuất
   void _dialogToLogOut() {
     showDialog(
       context: context,
@@ -107,14 +189,14 @@ class _MyAccountScreen extends State<MyAccountScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
           child: Row(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(40),
                 child: SizedBox(
-                  height: 60,
-                  width: 60,
+                  height: 50,
+                  width: 50,
                   child: Image.network(
                     'https://t3.ftcdn.net/jpg/05/70/71/06/360_F_570710660_Jana1ujcJyQTiT2rIzvfmyXzXamVcby8.jpg',
                   ),
@@ -134,6 +216,8 @@ class _MyAccountScreen extends State<MyAccountScreen> {
             ],
           ),
         ),
+        isForAdminWidget(),
+        Container(height: 3, color: const Color.fromARGB(255, 227, 222, 222)),
         TextButton(
           onPressed: () {
             if (userIsLoggedIn) {

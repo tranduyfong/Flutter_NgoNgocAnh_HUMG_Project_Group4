@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/screens/listtitle.dart';
+import 'package:flutter_project_group4/screens/news.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 import 'package:flutter_project_group4/models/api.dart';
 
@@ -79,13 +81,6 @@ class _HotWidgetState extends State<HotWidget> {
                                                     ),
                                                   ),
                                                 );
-                                                // Navigator.of(context).push(
-                                                //   MaterialPageRoute(
-                                                //     builder:
-                                                //         (context) =>
-                                                //             FindingScreen(),
-                                                //   ),
-                                                // );
                                               },
                                               child: Image.network(
                                                 fit: BoxFit.cover,
@@ -237,8 +232,9 @@ class _HotWidgetState extends State<HotWidget> {
                                           ),
                                         ),
                                         Text(
-                                          ' - '
-                                          '2 giờ',
+                                          NewsScreen.timeCreateAtTitle(
+                                            data[index]['NgayDang'],
+                                          ),
                                           style: TextStyle(fontSize: 12),
                                         ),
                                       ],

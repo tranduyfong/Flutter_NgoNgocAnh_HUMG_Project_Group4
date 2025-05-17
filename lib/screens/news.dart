@@ -8,11 +8,23 @@ import 'package:intl/intl.dart';
 
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});
+  static String timeCreateAtTitle(String createAtString) {
+    final createAt = DateTime.parse(createAtString);
+    final duration = DateTime.now().difference(createAt);
+
+    if (duration.inMinutes < 60) {
+      return ' - ${duration.inMinutes} phút';
+    } else if (duration.inHours < 24) {
+      return ' - ${duration.inHours} giờ';
+    } else {
+      return ' - ${duration.inDays} ngày';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    String formattedDate = DateFormat('dd-MM-yyyy').format(now);
     TabIndicatorAnimation tabIndicatorAnimation = TabIndicatorAnimation.elastic;
     return DefaultTabController(
       length: 9, // Số lượng tab
