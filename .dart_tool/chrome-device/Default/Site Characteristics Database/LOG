@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-2025/05/17-09:22:07.113 4224 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\Site Characteristics Database/MANIFEST-000001
-2025/05/17-09:22:07.114 4224 Recovering log #3
-2025/05/17-09:22:07.114 4224 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.e77e3a93\flutter_tools_chrome_device.3d052bfb\Default\Site Characteristics Database/000003.log 
-=======
-2025/05/10-08:43:57.280 3244 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\Site Characteristics Database/MANIFEST-000001
-2025/05/10-08:43:57.281 3244 Recovering log #3
-2025/05/10-08:43:57.281 3244 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.2631ac2d\flutter_tools_chrome_device.7b8229fc\Default\Site Characteristics Database/000003.log 
->>>>>>> de0301d (Hoan thanh mot so chuc nang)
+2025/05/17-10:16:06.750 b504 Reusing MANIFEST C:\Users\PC\AppData\Local\Temp\flutter_tools.2f76e832\flutter_tools_chrome_device.80e53316\Default\Site Characteristics Database/MANIFEST-000001
+2025/05/17-10:16:06.751 b504 Recovering log #3
+2025/05/17-10:16:06.752 b504 Level-0 table #6: started
+2025/05/17-10:16:06.757 b504 Level-0 table #6: 448 bytes OK
+2025/05/17-10:16:06.757 b504 Recovering log #6
+2025/05/17-10:16:06.758 b504 Reusing old log C:\Users\PC\AppData\Local\Temp\flutter_tools.2f76e832\flutter_tools_chrome_device.80e53316\Default\Site Characteristics Database/000006.log 
+2025/05/17-10:16:06.760 b504 Delete type=0 #3

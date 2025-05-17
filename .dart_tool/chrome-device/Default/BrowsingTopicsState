@@ -1,32 +1,12 @@
 {
    "epochs": [ {
-      "calculation_time": "13389786207306792",
-      "config_version": 0,
-      "model_version": "0",
-      "padded_top_topics_start_index": 0,
-      "taxonomy_version": 0,
-      "top_topics_and_observing_domains": [  ]
-   }, {
-      "calculation_time": "13390839818658527",
-      "config_version": 0,
-      "model_version": "0",
-      "padded_top_topics_start_index": 0,
-      "taxonomy_version": 0,
-      "top_topics_and_observing_domains": [  ]
-<<<<<<< HEAD
-   }, {
-      "calculation_time": "13391921914744500",
+      "calculation_time": "13391925241206331",
       "config_version": 0,
       "model_version": "0",
       "padded_top_topics_start_index": 0,
       "taxonomy_version": 0,
       "top_topics_and_observing_domains": [  ]
    } ],
-   "hex_encoded_hmac_key": "63CA3261A1AAF9700DED7B71482E70CA15A98D25A057B6385ECDBEEEE830A596",
-   "next_scheduled_calculation_time": "13392526714747192"
-=======
-   } ],
-   "hex_encoded_hmac_key": "63CA3261A1AAF9700DED7B71482E70CA15A98D25A057B6385ECDBEEEE830A596",
-   "next_scheduled_calculation_time": "13391444618658664"
->>>>>>> de0301d (Hoan thanh mot so chuc nang)
+   "hex_encoded_hmac_key": "0000000000000000000000000000000000000000000000000000000000000000",
+   "next_scheduled_calculation_time": "13392530041206396"
 }

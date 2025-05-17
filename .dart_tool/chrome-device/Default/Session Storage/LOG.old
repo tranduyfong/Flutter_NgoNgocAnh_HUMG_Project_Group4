@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-2025/05/17-09:18:26.759 28c8 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Session Storage/MANIFEST-000001
-2025/05/17-09:18:26.760 28c8 Recovering log #3
-2025/05/17-09:18:26.763 28c8 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Session Storage/000003.log 
-=======
-2025/05/09-18:44:42.484 4cc4 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Session Storage/MANIFEST-000001
-2025/05/09-18:44:42.485 4cc4 Recovering log #3
-2025/05/09-18:44:42.488 4cc4 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Session Storage/000003.log 
->>>>>>> de0301d (Hoan thanh mot so chuc nang)
+2025/05/17-10:13:57.264 7600 Creating DB C:\Users\PC\AppData\Local\Temp\flutter_tools.f1b4d234\flutter_tools_chrome_device.fcd4f186\Default\Session Storage since it was missing.
+2025/05/17-10:13:57.337 7600 Reusing MANIFEST C:\Users\PC\AppData\Local\Temp\flutter_tools.f1b4d234\flutter_tools_chrome_device.fcd4f186\Default\Session Storage/MANIFEST-000001

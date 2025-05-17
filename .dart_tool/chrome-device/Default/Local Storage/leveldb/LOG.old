@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-2025/05/17-09:18:26.595 4c34 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Local Storage\leveldb/MANIFEST-000001
-2025/05/17-09:18:26.599 4c34 Recovering log #3
-2025/05/17-09:18:26.601 4c34 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Local Storage\leveldb/000003.log 
-=======
-2025/05/09-18:44:42.341 4cc4 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Local Storage\leveldb/MANIFEST-000001
-2025/05/09-18:44:42.348 4cc4 Recovering log #3
-2025/05/09-18:44:42.351 4cc4 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Local Storage\leveldb/000003.log 
->>>>>>> de0301d (Hoan thanh mot so chuc nang)
+2025/05/17-10:13:57.216 c768 Creating DB C:\Users\PC\AppData\Local\Temp\flutter_tools.f1b4d234\flutter_tools_chrome_device.fcd4f186\Default\Local Storage\leveldb since it was missing.
+2025/05/17-10:13:57.338 c768 Reusing MANIFEST C:\Users\PC\AppData\Local\Temp\flutter_tools.f1b4d234\flutter_tools_chrome_device.fcd4f186\Default\Local Storage\leveldb/MANIFEST-000001

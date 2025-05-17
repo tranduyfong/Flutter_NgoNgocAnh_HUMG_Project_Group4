@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-2025/05/17-09:18:26.558 17e8 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Service Worker\Database/MANIFEST-000001
-2025/05/17-09:18:26.559 17e8 Recovering log #3
-2025/05/17-09:18:26.559 17e8 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.cfb85df9\flutter_tools_chrome_device.84abfdbb\Default\Service Worker\Database/000003.log 
-=======
-2025/05/09-18:44:42.272 5338 Reusing MANIFEST C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Service Worker\Database/MANIFEST-000001
-2025/05/09-18:44:42.272 5338 Recovering log #3
-2025/05/09-18:44:42.272 5338 Reusing old log C:\Users\ThinkPad\AppData\Local\Temp\flutter_tools.eccd40c7\flutter_tools_chrome_device.e98ca620\Default\Service Worker\Database/000003.log 
->>>>>>> de0301d (Hoan thanh mot so chuc nang)
+2025/05/17-10:04:27.192 8630 Creating DB C:\Users\PC\AppData\Local\Temp\flutter_tools.62483bb7\flutter_tools_chrome_device.db11bc04\Default\Service Worker\Database since it was missing.
+2025/05/17-10:04:27.198 8630 Reusing MANIFEST C:\Users\PC\AppData\Local\Temp\flutter_tools.62483bb7\flutter_tools_chrome_device.db11bc04\Default\Service Worker\Database/MANIFEST-000001
