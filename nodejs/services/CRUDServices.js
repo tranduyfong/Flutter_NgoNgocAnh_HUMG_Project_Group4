@@ -89,4 +89,13 @@ const checkExistAccount = async (req, res) => {
     let [results, fields] = await connection.query('SELECT * FROM NguoiDung WHERE Email = ?', [email]);
     res.json(results);
 }
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount }
+
+const createArtical = async (req, res) => {
+    const { tieuDe, gioiThieu, noiDung, img_path, tacGia, danhMuc } = req.body;
+    const currentDate = new Date();
+
+    let [results, fields] = await connection.query('INSERT INTO BaiBao(TieuDeBao, GioiThieu, NoiDung, img_path, NgayDang, idDanhMuc, idTacGia) VALUES (?, ?, ?, ?, ?, ?, ?)', [tieuDe, gioiThieu, noiDung, img_path, currentDate, danhMuc, tacGia]);
+    res.json({ message: 'Tạo bài báo thành công' });
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical }
