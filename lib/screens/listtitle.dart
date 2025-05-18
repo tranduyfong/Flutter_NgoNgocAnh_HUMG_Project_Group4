@@ -15,9 +15,37 @@ class _ListTitleScreens extends State<ListTitleScreens> {
   final TextEditingController textEditingController = TextEditingController();
   final DataService dataService = DataService();
 
-  void deletedTitle(int idBao) {
-    
+  void showDialogDeletedTitle(int idBao) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Xóa bài báo'),
+            content: Text('Bạn thực sự có muốn xóa bài báo này ?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Hủy'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  dataService.deleteArticle(idBao);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => ListTitleScreens()),
+                    (Route<dynamic> route) =>
+                        false, // Xóa tất cả các route trước đó
+                  );
+                },
+                child: Text('Xóa', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,7 +194,11 @@ class _ListTitleScreens extends State<ListTitleScreens> {
                                               icon: Icon(Icons.edit),
                                             ),
                                             IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                showDialogDeletedTitle(
+                                                  data[index]['idBao'],
+                                                );
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: Colors.red,

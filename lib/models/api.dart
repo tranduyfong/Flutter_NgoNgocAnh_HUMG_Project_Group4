@@ -204,4 +204,16 @@ class DataService {
       throw Exception('Loi van de');
     }
   }
+
+  Future<Map<String, dynamic>> deleteArticle(int idBao) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/delete/article/$idBao'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
 }
