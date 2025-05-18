@@ -97,5 +97,11 @@ const createArtical = async (req, res) => {
     let [results, fields] = await connection.query('INSERT INTO BaiBao(TieuDeBao, GioiThieu, NoiDung, img_path, NgayDang, idDanhMuc, idTacGia) VALUES (?, ?, ?, ?, ?, ?, ?)', [tieuDe, gioiThieu, noiDung, img_path, currentDate, danhMuc, tacGia]);
     res.json({ message: 'Tạo bài báo thành công' });
 }
+const deleteArticle = async (req, res) => {
+    const idBao = req.params.idBao;
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical }
+    await connection.query('DELETE FROM BaiBao WHERE idBao = ?', [idBao]);
+    res.json({ success: true });
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle }
