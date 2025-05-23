@@ -1,7 +1,7 @@
 const express = require('express');
 const { authMiddleWare } = require('../middleware/jwtMiddleware')
 const router = express.Router();
-const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle } = require('../services/CRUDServices');
+const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites } = require('../services/CRUDServices');
 
 router.get('/', getAllDatas);
 router.get('/getNews/:idBao', getNews);
@@ -14,5 +14,6 @@ router.post('/create/user', createAccount);
 router.get('/checkExistAccount/:email', checkExistAccount);
 router.post('/create/article', createArtical);
 router.delete('/delete/article/:idBao', deleteArticle);
-router.put('/update/article/:idBao', updateArticle)
+router.put('/update/article/:idBao', updateArticle);
+router.get('/get/list/favourites', authMiddleWare, getListArticleFavourites)
 module.exports = router;

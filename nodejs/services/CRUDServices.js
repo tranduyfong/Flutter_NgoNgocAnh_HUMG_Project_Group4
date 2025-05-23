@@ -112,4 +112,12 @@ const updateArticle = async (req, res) => {
     res.json({ message: 'Sửa bài báo thành công' });
 }
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle }
+const getListArticleFavourites = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+
+    let [results, fields] = await connection.query('SELECT * FROM YeuThichBaiBao INNER JOIN BaiBao ON YeuThichBaiBao.idBao = BaiBao.idBao INNER JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idNguoiDung = ?', [idNguoiDung]);
+    res.json(results);
+}
+
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites }
