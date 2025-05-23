@@ -27,6 +27,7 @@ class _ReadingNews extends State<ReadingNews> {
     super.initState();
     _checkLoginStatus();
     _loadLikedStatus();
+    _upViewArticle();
   }
 
   // The function to check logged
@@ -62,6 +63,14 @@ class _ReadingNews extends State<ReadingNews> {
       });
     } else {
       showDialogToRequestLikeArticle();
+    }
+  }
+
+  void _upViewArticle() async {
+    try {
+      await dataService.upViewArticle(widget.idBao);
+    } catch (e) {
+      print('Lỗi cập nhật lượt xem: $e');
     }
   }
 

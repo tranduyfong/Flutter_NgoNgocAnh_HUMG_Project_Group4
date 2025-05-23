@@ -290,4 +290,16 @@ class DataService {
       throw Exception('Không thể tải dữ liệu');
     }
   }
+
+  Future<Map<String, dynamic>> upViewArticle(int idBao) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/update/view/$idBao'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
 }
