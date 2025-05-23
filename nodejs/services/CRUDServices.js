@@ -138,4 +138,20 @@ const getListArticleFind = async (req, res) => {
         res.status(500).json({ error: 'Đã xảy ra lỗi.' });
     }
 };
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle }
+
+const updateTheView = async (req, res) => {
+    const idBao = req.params.idBao;
+
+    const [rows] = await connection.query('SELECT LuotXem FROM BaiBao WHERE idBao = ?', [idBao]);
+    if (rows.length === 0) {
+        return res.status(404).json({ message: 'Bài báo không tồn tại' });
+    }
+
+    const newCount = rows[0].LuotXem + 1;
+    await connection.query('UPDATE BaiBao SET LuotXem = ? WHERE idBao = ?', [newCount, idBao]);
+
+    res.json({ message: 'Tăng view bài báo thành công' });
+};
+
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView }
