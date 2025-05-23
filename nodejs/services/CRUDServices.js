@@ -104,4 +104,12 @@ const deleteArticle = async (req, res) => {
     res.json({ success: true });
 }
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle }
+const updateArticle = async (req, res) => {
+    const idBao = req.params.idBao;
+    const { tieuDe, gioiThieu, noiDung, img_path, tacGia, danhMuc } = req.body;
+
+    let [results, fields] = await connection.query('UPDATE BaiBao SET TieuDeBao = ?, GioiThieu = ?, NoiDung = ?, img_path = ?, idDanhMuc = ?, idTacGia = ? WHERE idBao = ?', [tieuDe, gioiThieu, noiDung, img_path, danhMuc, tacGia, idBao]);
+    res.json({ message: 'Sửa bài báo thành công' });
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle }
