@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/models/api.dart';
-import 'package:flutter_project_group4/screens/listtitle.dart';
 
 class CreateTitle extends StatefulWidget {
   const CreateTitle({super.key});
@@ -233,7 +232,6 @@ class _CreateTitleState extends State<CreateTitle> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Tạo bài báo thành công.')),
                     );
-                    int countPop = 0;
                     Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: Text(

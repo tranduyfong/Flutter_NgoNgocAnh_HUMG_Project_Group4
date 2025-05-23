@@ -31,8 +31,11 @@ class _ListTitleScreens extends State<ListTitleScreens> {
                 child: Text('Hủy'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  dataService.deleteArticle(idBao);
+                onPressed: () async {
+                  await dataService.deleteArticle(idBao);
+                  await dataService.deleteArticleFavouriteAfterDeleteArtical(
+                    idBao,
+                  );
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 child: Text('Xóa', style: TextStyle(color: Colors.red)),

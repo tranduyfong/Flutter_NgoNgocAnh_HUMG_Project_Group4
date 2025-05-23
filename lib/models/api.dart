@@ -217,6 +217,20 @@ class DataService {
     }
   }
 
+  Future<Map<String, dynamic>> deleteArticleFavouriteAfterDeleteArtical(
+    int idBao,
+  ) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/delete/articleFavourite/$idBao'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
   Future<Map<String, dynamic>> editArticle(
     String tieuDe,
     String gioiThieu,
@@ -261,6 +275,19 @@ class DataService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> findArticle(String titleFinding) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/get/list/find'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({"noiDung": titleFinding}),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
     }
   }
 }

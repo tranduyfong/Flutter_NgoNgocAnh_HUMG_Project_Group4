@@ -121,11 +121,15 @@ class _MyAccountScreen extends State<MyAccountScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const FavouritesScreen(),
-                  ),
-                );
+                if (userIsLoggedIn == false) {
+                  showDialogToRequestLogin();
+                } else {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const FavouritesScreen(),
+                    ),
+                  );
+                }
               },
               child: Text(
                 'Đã thích',
@@ -163,6 +167,32 @@ class _MyAccountScreen extends State<MyAccountScreen> {
                   );
                 },
                 child: Text('Đăng xuất', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+    );
+  }
+
+  // Hàm yêu cầu người dùng đăng nhập
+  void showDialogToRequestLogin() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Bạn chưa đăng nhập'),
+            content: Text('Hãy đăng nhập để xem danh sách yêu thích bài báo'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Hủy', style: TextStyle(color: Colors.red)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text('Đăng nhập'),
               ),
             ],
           ),

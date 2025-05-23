@@ -256,6 +256,10 @@ class _ReadingNews extends State<ReadingNews> {
             return Center(child: Text('Lỗi: ${snapshot.error}'));
           } else {
             final data = snapshot.data!;
+            int viewCount =
+                data[0]['LuotXem'] is int
+                    ? data[0]['LuotXem']
+                    : int.parse(data[0]['LuotXem'].toString());
             return ListView(
               children: <Widget>[
                 Padding(
@@ -265,6 +269,17 @@ class _ReadingNews extends State<ReadingNews> {
                     style: TextStyle(
                       fontSize: fontSize + 2,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: Text(
+                    '$viewCount lượt xem bài báo này',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Colors.grey,
+                      fontSize: fontSize - 10,
                     ),
                   ),
                 ),
