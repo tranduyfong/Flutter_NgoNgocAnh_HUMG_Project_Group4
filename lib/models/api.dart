@@ -244,4 +244,23 @@ class DataService {
       throw Exception('Loi van de');
     }
   }
+
+  Future<List<dynamic>> getFavouritesList() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('jwtToken');
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/list/favourites'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
 }
