@@ -104,6 +104,12 @@ const deleteArticle = async (req, res) => {
     res.json({ success: true });
 }
 
+const deleteArticleFavouriteAfterDeleteArticle = async (req, res) => {
+    const idBao = req.params.idBao;
+
+    await connection.query('DELETE FROM YeuThichBaiBao WHERE idBao = ?', [idBao]);
+    res.json({ success: true });
+}
 const updateArticle = async (req, res) => {
     const idBao = req.params.idBao;
     const { tieuDe, gioiThieu, noiDung, img_path, tacGia, danhMuc } = req.body;
@@ -119,5 +125,17 @@ const getListArticleFavourites = async (req, res) => {
     res.json(results);
 }
 
-
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites }
+const getListArticleFind = async (req, res) => {
+    try {
+        const noiDung = req.body.noiDung;
+        const [results, fields] = await connection.query(
+            'SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE TieuDeBao LIKE ?',
+            [`%${noiDung}%`]
+        );
+        res.json(results);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Đã xảy ra lỗi.' });
+    }
+};
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle }
