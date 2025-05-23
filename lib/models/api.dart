@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://192.168.56.1:3000';
+  static final String baseUrl = 'http://192.168.61.101:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {

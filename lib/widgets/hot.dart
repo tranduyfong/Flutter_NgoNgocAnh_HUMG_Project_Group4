@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/screens/news.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 import 'package:flutter_project_group4/models/api.dart';
+import 'package:cached_network_image/cached_network_image.dart'; // thêm thư viện này
 
 class HotWidget extends StatefulWidget {
   const HotWidget({super.key});
@@ -12,27 +13,30 @@ class HotWidget extends StatefulWidget {
 
 class _HotWidgetState extends State<HotWidget> {
   final DataService dataService = DataService();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
       future: dataService.getAllData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Lỗi: ${snapshot.error}'));
         } else {
           final data = snapshot.data!;
-          return ListView(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
+          return ListView.builder(
+            itemCount: data.length + 1,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                // Phần "ĐỌC NHIỀU"
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: SizedBox(
                     height: 300,
                     width: double.infinity,
                     child: Card(
-                      margin: const EdgeInsets.all(0),
+                      margin: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0),
                       ),
@@ -40,98 +44,33 @@ class _HotWidgetState extends State<HotWidget> {
                         padding: const EdgeInsets.fromLTRB(15, 15, 0, 30),
                         child: Column(
                           children: [
-                            Expanded(
-                              flex: 1,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'ĐỌC NHIỀU',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'ĐỌC NHIỀU',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Expanded(
-                              flex: 10,
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                ScaffoldMessenger.of(
-                                                  context,
-                                                ).showSnackBar(
-                                                  SnackBar(
-                                                    content: Text(
-                                                      'Đăng nhập thất bại',
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Image.network(
-                                                fit: BoxFit.cover,
-                                                'https://image.nhandan.vn/Uploaded/2025/buimsbrobuyvco/2025_04_18/a1-dsc-4655-2540-908.jpg',
-                                                width: double.infinity,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Tổng Bí thư Tô Lâm tiếp Tổng Giám đốc Quỹ đầu tư Warburg Pincus (Hoa Kỳ)',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                children: [
+                                  _buildDocNhieuItem(
+                                    imgUrl:
+                                        'https://image.nhandan.vn/Uploaded/2025/buimsbrobuyvco/2025_04_18/a1-dsc-4655-2540-908.jpg',
+                                    title:
+                                        'Tổng Bí thư Tô Lâm tiếp Tổng Giám đốc Quỹ đầu tư Warburg Pincus (Hoa Kỳ)',
                                   ),
-                                  SizedBox(width: 20),
-                                  SizedBox(
-                                    width: 300,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          flex: 4,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.network(
-                                              fit: BoxFit.cover,
-                                              'https://file3.qdnd.vn/data/images/0/2025/04/19/upload_2268/thu%20truong%20quyet%202.jpg?dpi=150&quality=100&w=870',
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            'Thượng tướng Trịnh Văn Quyết chủ trì tổng duyệt Chương trình nghệ thuật “Đất nước trọn niềm vui',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  const SizedBox(width: 20),
+                                  _buildDocNhieuItem(
+                                    imgUrl:
+                                        'https://file3.qdnd.vn/data/images/0/2025/04/19/upload_2268/thu%20truong%20quyet%202.jpg?dpi=150&quality=100&w=870',
+                                    title:
+                                        'Thượng tướng Trịnh Văn Quyết chủ trì tổng duyệt Chương trình nghệ thuật “Đất nước trọn niềm vui"',
                                   ),
                                 ],
                               ),
@@ -141,119 +80,154 @@ class _HotWidgetState extends State<HotWidget> {
                       ),
                     ),
                   ),
-                ],
-              ),
-              ListView.builder(
-                itemCount: data.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
+                );
+              } else {
+                final item =
+                    data[index - 1]; // trừ 1 vì index 0 là phần Đọc Nhiều
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: SizedBox(
                         height: 125,
-                        child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => ReadingNews(
+                                            idBao: item['idBao']!,
+                                            imgPathLogo: item['img_path_logo']!,
+                                          ),
+                                    ),
+                                  );
+                                },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(4),
-                                  child: GestureDetector(
-                                    onTap: () {
+                                  child: CachedNetworkImage(
+                                    imageUrl: item['img_path'],
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    placeholder:
+                                        (context, url) =>
+                                            CircularProgressIndicator(),
+                                    errorWidget:
+                                        (context, url, error) =>
+                                            Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              flex: 7,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder:
                                               (context) => ReadingNews(
-                                                idBao: data[index]['idBao']!,
+                                                idBao: item['idBao']!,
                                                 imgPathLogo:
-                                                    data[index]['img_path_logo']!,
+                                                    item['img_path_logo']!,
                                               ),
                                         ),
                                       );
                                     },
-                                    child: Image.network(
-                                      fit: BoxFit.cover,
-                                      height: double.infinity,
-                                      data[index]['img_path'],
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                    child: Text(
+                                      item['TieuDeBao'],
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                flex: 7,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder:
-                                                (context) => ReadingNews(
-                                                  idBao: data[index]['idBao']!,
-                                                  imgPathLogo:
-                                                      data[index]['img_path_logo']!,
-                                                ),
-                                          ),
-                                        );
-                                      },
-                                      style: ButtonStyle(
-                                        padding: WidgetStateProperty.all(
-                                          EdgeInsets.zero,
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                        width: 40,
+                                        child: CachedNetworkImage(
+                                          imageUrl: item['img_path_logo']!,
+                                          fit: BoxFit.contain,
+                                          errorWidget:
+                                              (context, url, error) =>
+                                                  Icon(Icons.error),
                                         ),
                                       ),
-                                      child: Align(
-                                        // alignment: Alignment.topLeft,
-                                        child: Text(
-                                          data[index]['TieuDeBao'],
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 17,
-                                          ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        NewsScreen.timeCreateAtTitle(
+                                          item['NgayDang'],
                                         ),
+                                        style: const TextStyle(fontSize: 12),
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 20,
-                                          width: 40,
-                                          child: Image.network(
-                                            fit: BoxFit.contain,
-                                            data[index]['img_path_logo']!,
-                                          ),
-                                        ),
-                                        Text(
-                                          NewsScreen.timeCreateAtTitle(
-                                            data[index]['NgayDang'],
-                                          ),
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      Divider(height: 5),
-                    ],
-                  );
-                },
-              ),
-            ],
+                    ),
+                    const Divider(height: 5),
+                  ],
+                );
+              }
+            },
           );
         }
       },
+    );
+  }
+
+  Widget _buildDocNhieuItem({required String imgUrl, required String title}) {
+    return SizedBox(
+      width: 300,
+      child: Column(
+        children: [
+          Expanded(
+            flex: 4,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl: imgUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            flex: 1,
+            child: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
