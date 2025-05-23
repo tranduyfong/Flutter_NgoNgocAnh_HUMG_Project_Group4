@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://192.168.61.102:3000';
+  static final String baseUrl = 'http://192.168.56.1:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {
@@ -214,6 +214,34 @@ class DataService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  Future<Map<String, dynamic>> editArticle(
+    String tieuDe,
+    String gioiThieu,
+    String linkBaiBao,
+    String noiDungBaiBao,
+    int tacGia,
+    int danhMuc,
+    int idBao,
+  ) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/update/article/$idBao'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'tieuDe': tieuDe,
+        'gioiThieu': gioiThieu,
+        'noiDung': noiDungBaiBao,
+        'img_path': linkBaiBao,
+        'tacGia': tacGia,
+        'danhMuc': danhMuc,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
     }
   }
 }

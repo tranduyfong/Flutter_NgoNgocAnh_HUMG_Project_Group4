@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/models/api.dart';
 import 'package:flutter_project_group4/screens/createtitle.dart';
+import 'package:flutter_project_group4/screens/editartical.dart';
 import 'package:flutter_project_group4/screens/news.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 
@@ -32,12 +33,7 @@ class _ListTitleScreens extends State<ListTitleScreens> {
               ElevatedButton(
                 onPressed: () {
                   dataService.deleteArticle(idBao);
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => ListTitleScreens()),
-                    (Route<dynamic> route) =>
-                        false, // Xóa tất cả các route trước đó
-                  );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 child: Text('Xóa', style: TextStyle(color: Colors.red)),
               ),
@@ -190,7 +186,19 @@ class _ListTitleScreens extends State<ListTitleScreens> {
                                         child: Row(
                                           children: [
                                             IconButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder:
+                                                        (
+                                                          context,
+                                                        ) => EditArtical(
+                                                          idBao:
+                                                              data[index]['idBao'],
+                                                        ),
+                                                  ),
+                                                );
+                                              },
                                               icon: Icon(Icons.edit),
                                             ),
                                             IconButton(

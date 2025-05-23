@@ -233,14 +233,8 @@ class _CreateTitleState extends State<CreateTitle> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Tạo bài báo thành công.')),
                     );
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ListTitleScreens(),
-                      ),
-                      (Route<dynamic> route) =>
-                          false, // Xóa tất cả các route trước đó
-                    );
+                    int countPop = 0;
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   },
                   child: Text(
                     'Thêm',
