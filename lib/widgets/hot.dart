@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/screens/news.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 import 'package:flutter_project_group4/models/api.dart';
-import 'package:cached_network_image/cached_network_image.dart'; // thêm thư viện này
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HotWidget extends StatefulWidget {
   const HotWidget({super.key});
@@ -16,17 +16,21 @@ class _HotWidgetState extends State<HotWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future: dataService.getAllData(),
+    return FutureBuilder<List<List<dynamic>>>(
+      future: Future.wait([
+        dataService.getAllData(),
+        dataService.getArticleManyReads(),
+      ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Lỗi: ${snapshot.error}'));
         } else {
-          final data = snapshot.data!;
+          final alldData = snapshot.data![0];
+          final manyReadArticles = snapshot.data![1];
           return ListView.builder(
-            itemCount: data.length + 1,
+            itemCount: alldData.length + 1,
             itemBuilder: (context, index) {
               if (index == 0) {
                 // Phần "ĐỌC NHIỀU"
@@ -56,23 +60,30 @@ class _HotWidgetState extends State<HotWidget> {
                             ),
                             const SizedBox(height: 20),
                             Expanded(
-                              child: ListView(
+                              child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
-                                children: [
-                                  _buildDocNhieuItem(
-                                    imgUrl:
-                                        'https://image.nhandan.vn/Uploaded/2025/buimsbrobuyvco/2025_04_18/a1-dsc-4655-2540-908.jpg',
-                                    title:
-                                        'Tổng Bí thư Tô Lâm tiếp Tổng Giám đốc Quỹ đầu tư Warburg Pincus (Hoa Kỳ)',
-                                  ),
-                                  const SizedBox(width: 20),
-                                  _buildDocNhieuItem(
-                                    imgUrl:
-                                        'https://file3.qdnd.vn/data/images/0/2025/04/19/upload_2268/thu%20truong%20quyet%202.jpg?dpi=150&quality=100&w=870',
-                                    title:
-                                        'Thượng tướng Trịnh Văn Quyết chủ trì tổng duyệt Chương trình nghệ thuật “Đất nước trọn niềm vui"',
-                                  ),
-                                ],
+                                itemCount: manyReadArticles.length,
+                                separatorBuilder:
+                                    (_, __) => const SizedBox(width: 20),
+                                itemBuilder: (context, i) {
+                                  final news = manyReadArticles[i];
+                                  return _buildDocNhieuItem(
+                                    imgUrl: news['img_path'],
+                                    title: news['TieuDeBao'],
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => ReadingNews(
+                                                idBao: news['idBao'],
+                                                imgPathLogo:
+                                                    news['img_path_logo'],
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -83,7 +94,7 @@ class _HotWidgetState extends State<HotWidget> {
                 );
               } else {
                 final item =
-                    data[index - 1]; // trừ 1 vì index 0 là phần Đọc Nhiều
+                    alldData[index - 1]; // trừ 1 vì index 0 là phần Đọc Nhiều
                 return Column(
                   children: [
                     Padding(
@@ -198,35 +209,42 @@ class _HotWidgetState extends State<HotWidget> {
     );
   }
 
-  Widget _buildDocNhieuItem({required String imgUrl, required String title}) {
-    return SizedBox(
-      width: 300,
-      child: Column(
-        children: [
-          Expanded(
-            flex: 4,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: imgUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+  Widget _buildDocNhieuItem({
+    required String imgUrl,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        width: 300,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 4,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            flex: 1,
-            child: Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+            const SizedBox(height: 10),
+            Expanded(
+              flex: 1,
+              child: Text(
+                title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

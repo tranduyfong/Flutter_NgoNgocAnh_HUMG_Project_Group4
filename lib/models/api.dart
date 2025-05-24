@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://192.168.61.101:3000';
+  static final String baseUrl = 'http://172.20.10.3:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {
@@ -294,6 +294,18 @@ class DataService {
   Future<Map<String, dynamic>> upViewArticle(int idBao) async {
     final response = await http.put(
       Uri.parse('$baseUrl/update/view/$idBao'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getArticleManyReads() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/articleManyReads'),
       headers: {'Content-Type': 'application/json'},
     );
     if (response.statusCode == 200) {
