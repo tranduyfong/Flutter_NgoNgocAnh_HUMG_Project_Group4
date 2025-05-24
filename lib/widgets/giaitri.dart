@@ -3,14 +3,14 @@ import 'package:flutter_project_group4/models/api.dart';
 import 'package:flutter_project_group4/screens/news.dart';
 import 'package:flutter_project_group4/screens/reading.dart';
 
-class InternationalFootball extends StatefulWidget {
-  const InternationalFootball({super.key});
+class GiaitriWidget extends StatefulWidget {
+  const GiaitriWidget({super.key});
 
   @override
-  State<InternationalFootball> createState() => _InternationalFootball();
+  State<GiaitriWidget> createState() => _GiaitriWidget();
 }
 
-class _InternationalFootball extends State<InternationalFootball> {
+class _GiaitriWidget extends State<GiaitriWidget> {
   DataService dataService = DataService();
 
   @override
@@ -18,7 +18,7 @@ class _InternationalFootball extends State<InternationalFootball> {
     return Padding(
       padding: EdgeInsets.all(10),
       child: FutureBuilder<List<dynamic>>(
-        future: dataService.getInternationalFootballCategories(),
+        future: dataService.getEntertaimentCategories(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

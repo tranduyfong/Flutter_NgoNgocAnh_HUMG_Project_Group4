@@ -314,4 +314,112 @@ class DataService {
       throw Exception('Loi van de');
     }
   }
+
+  Future<List<dynamic>> getHotCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/hot'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getNewCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/new'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getVietNamFootballCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/vietnamfootball'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getInternationalFootballCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/international'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getDocLaCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/docvala'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getLovedCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/loved'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getEntertaimentCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/entertaiment'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getWorldCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/world'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getLawCategories() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/law'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
 }

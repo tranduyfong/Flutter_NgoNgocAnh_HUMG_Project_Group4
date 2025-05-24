@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/screens/find.dart';
+import 'package:flutter_project_group4/widgets/docvala.dart';
+import 'package:flutter_project_group4/widgets/giaitri.dart';
 import 'package:flutter_project_group4/widgets/hot.dart';
 import 'package:flutter_project_group4/widgets/internationalfootball.dart';
 import 'package:flutter_project_group4/widgets/new.dart';
+import 'package:flutter_project_group4/widgets/phapluat.dart';
+import 'package:flutter_project_group4/widgets/thegioi.dart';
+import 'package:flutter_project_group4/widgets/tinhyeu.dart';
 import 'package:flutter_project_group4/widgets/vietnamfootball.dart';
 import 'package:intl/intl.dart';
 
@@ -101,11 +106,11 @@ class NewsScreen extends StatelessWidget {
                 NewWidget(),
                 VietNamFootBall(),
                 InternationalFootball(),
-                Center(child: Text('Nội dung Hot')),
-                Center(child: Text('Nội dung Hot')),
-                Center(child: Text('Nội dung Top')),
-                Center(child: Text('Nội dung Mới')),
-                Center(child: Text('Nội dung Hot')),
+                DocVaLa(),
+                TinhYeuWidget(),
+                GiaitriWidget(),
+                TheGioiWidget(),
+                PhapLuatWidget(),
               ],
             ),
           ),
