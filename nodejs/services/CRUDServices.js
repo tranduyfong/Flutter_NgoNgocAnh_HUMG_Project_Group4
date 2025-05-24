@@ -157,4 +157,50 @@ const getArticleManyReads = async (req, res) => {
     let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE NgayDang >= DATE_SUB(NOW(), INTERVAL 3 DAY) ORDER BY LuotXem DESC LIMIT 5');
     res.json(results);
 }
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads }
+
+const getHotCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 1');
+    res.json(results);
+}
+
+const getNewCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 2');
+    res.json(results);
+}
+
+const getVietNamFootballCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 3');
+    res.json(results);
+}
+
+const getInternationalFootballCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 4');
+    res.json(results);
+}
+
+const getDocLaCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 5');
+    res.json(results);
+}
+
+const getLovedCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 6');
+    res.json(results);
+}
+
+const getEntertaimentCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 7');
+    res.json(results);
+}
+
+const getWorldCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 8');
+    res.json(results);
+}
+
+const getLawCategories = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 9');
+    res.json(results);
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories }
