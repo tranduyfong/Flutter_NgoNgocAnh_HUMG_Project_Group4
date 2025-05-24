@@ -153,5 +153,8 @@ const updateTheView = async (req, res) => {
     res.json({ message: 'Tăng view bài báo thành công' });
 };
 
-
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView }
+const getArticleManyReads = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE NgayDang >= DATE_SUB(NOW(), INTERVAL 3 DAY) ORDER BY LuotXem DESC LIMIT 5');
+    res.json(results);
+}
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads }
