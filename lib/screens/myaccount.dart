@@ -78,11 +78,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.list,
-                size: 30,
-                color: const Color.fromARGB(255, 52, 151, 132),
-              ),
+              icon: Icon(Icons.list, size: 30, color: Colors.blue),
             ),
             TextButton(
               onPressed: () {
@@ -94,7 +90,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
               },
               child: Text(
                 'Danh sách bài báo',
-                style: TextStyle(color: const Color.fromARGB(255, 71, 71, 71)),
+                style: TextStyle(color: Colors.blue),
               ),
             ),
           ],
@@ -113,11 +109,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
                   ),
                 );
               },
-              icon: Icon(
-                Icons.favorite,
-                size: 30,
-                color: const Color.fromARGB(255, 52, 151, 132),
-              ),
+              icon: Icon(Icons.favorite, size: 30, color: Colors.red),
             ),
             TextButton(
               onPressed: () {
@@ -131,10 +123,7 @@ class _MyAccountScreen extends State<MyAccountScreen> {
                   );
                 }
               },
-              child: Text(
-                'Đã thích',
-                style: TextStyle(color: const Color.fromARGB(255, 71, 71, 71)),
-              ),
+              child: Text('Đã thích', style: TextStyle(color: Colors.red)),
             ),
           ],
         ),
@@ -179,17 +168,22 @@ class _MyAccountScreen extends State<MyAccountScreen> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: Text('Bạn chưa đăng nhập'),
+            title: Text(
+              'Bạn chưa đăng nhập',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             content: Text('Hãy đăng nhập để xem danh sách yêu thích bài báo'),
             actions: [
               TextButton(
                 onPressed: () {
+                  // Đóng dialog khi nhấn nút Hủy
                   Navigator.of(context).pop();
                 },
                 child: Text('Hủy', style: TextStyle(color: Colors.red)),
               ),
               ElevatedButton(
                 onPressed: () {
+                  // Điều hướng đến màn hình đăng nhập
                   Navigator.pushNamed(context, '/login');
                 },
                 child: Text('Đăng nhập'),
@@ -204,16 +198,21 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     return Column(
       children: [
         AppBar(
+          backgroundColor: Colors.blue,
           toolbarHeight: 80,
           title: Center(
             child: Column(
               children: [
                 Text(
                   'Cá nhân',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-                SizedBox(height: 10),
-                Divider(height: 0.1),
+                SizedBox(height: 5),
+                Divider(height: 0.1, color: Colors.white),
               ],
             ),
           ),
@@ -240,7 +239,11 @@ class _MyAccountScreen extends State<MyAccountScreen> {
                 },
                 child: Text(
                   userIsLoggedIn ? userName : 'Đăng nhập',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -248,14 +251,16 @@ class _MyAccountScreen extends State<MyAccountScreen> {
         ),
         isForAdminWidget(),
         Container(height: 3, color: const Color.fromARGB(255, 227, 222, 222)),
-        TextButton(
-          onPressed: () {
-            if (userIsLoggedIn) {
+        if (userIsLoggedIn) // Only show if userIsLoggedIn is true
+          TextButton(
+            onPressed: () {
               _dialogToLogOut();
-            }
-          },
-          child: Text('Đăng xuất', style: TextStyle(color: Colors.red)),
-        ),
+            },
+            child: Text(
+              'Đăng xuất',
+              style: TextStyle(color: Colors.redAccent, fontSize: 18),
+            ),
+          ),
       ],
     );
   }
