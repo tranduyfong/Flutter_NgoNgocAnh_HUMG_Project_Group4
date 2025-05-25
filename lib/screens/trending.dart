@@ -1,157 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_project_group4/reels/reel_video.dart';
+import 'package:flutter_project_group4/reels/video_item.dart';
 
 class TrendingScreen extends StatefulWidget {
   const TrendingScreen({super.key});
 
   @override
-  State<TrendingScreen> createState() => _TrendingScreen();
+  State<TrendingScreen> createState() => _TrendingScreenState();
 }
 
-class _TrendingScreen extends State<TrendingScreen> {
-  late VideoPlayerController _videoPlayerController;
-  PageController pageController = PageController();
-  late Uri pathUrl;
+class _TrendingScreenState extends State<TrendingScreen> {
+  late PageController _pageController;
+  int _currentIndex = 0;
 
-  Widget _buildProgressBar() {
-    final position = _videoPlayerController.value.position;
-    final duration = _videoPlayerController.value.duration;
-
-    final progress =
-        duration.inMilliseconds > 0
-            ? position.inMilliseconds / duration.inMilliseconds
-            : 0.0;
-
-    return LinearProgressIndicator(
-      value: progress,
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-      backgroundColor: const Color.fromARGB(255, 75, 73, 73),
-      minHeight: 1,
-    );
-  }
+  final List<VideoItem> videoItems = [
+    VideoItem(
+      videoUrl:
+          'https://streaming-cms-tpo.epicdn.me/b3c194cb296e2ab7a36583c1a08d5a46/6831fb10/2025_05_23/giang_thanh_01_1732.mp4',
+      avatarUrl: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
+      name: 'NHỊP SỐNG 24',
+      description:
+          'Chuyên gia nói gì về việc nhiều người trẻ chọn trút nỗi lòng với AI?',
+      likes: 200,
+      isLiked: false,
+    ),
+    VideoItem(
+      videoUrl:
+          'https://streaming-cms-tpo.epicdn.me/b944e5526c6290ef008ff56bd416aaa1/6831fb10/2025_05_23/viettel_9317.mp4',
+      avatarUrl: 'https://cdn-icons-png.flaticon.com/512/847/847969.png',
+      name: 'TIN NHANH',
+      description:
+          'Lòng xe điếu hiếm, nếu bị "phù phép" sẽ nguy hiểm như thế nào?',
+      likes: 850,
+      isLiked: false,
+    ),
+  ];
 
   @override
   void initState() {
+    _pageController = PageController();
     super.initState();
-    _videoPlayerController =
-        VideoPlayerController.networkUrl(
-            Uri.parse(
-              'https://streaming-cms-tpo-te-vnso-tt-16.epicdn.me/a5c964ec96c8490b4435e2f82c822c77/6828c090/2025_05_17/nhin_lai_hanh_trinh_xa_loi_hn_4725.mp4',
-            ),
-          )
-          ..addListener(() {
-            if (mounted) {
-              setState(() {});
-            }
-          })
-          ..setLooping(true)
-          ..initialize().then((_) {
-            setState(() {}); // Khi video đã sẵn sàng
-            _videoPlayerController.play(); // Tự động phát
-          });
   }
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: 3,
-      scrollDirection: Axis.vertical,
-      controller: pageController,
-      onPageChanged: (value) {
-        setState(() {
-          _videoPlayerController.play();
-          _videoPlayerController.seekTo(Duration.zero);
-        });
-      },
-      itemBuilder: (context, index) {
-        return Container(
-          color: Colors.black,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 6,
-                child:
-                    _videoPlayerController.value.isInitialized
-                        ? GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _videoPlayerController.value.isPlaying
-                                  ? _videoPlayerController.pause()
-                                  : _videoPlayerController.play();
-                            });
-                          },
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: SizedBox(
-                              width: _videoPlayerController.value.size.width,
-                              height: _videoPlayerController.value.size.height,
-                              child: AspectRatio(
-                                aspectRatio:
-                                    _videoPlayerController.value.aspectRatio,
-                                child: VideoPlayer(_videoPlayerController),
-                              ),
-                            ),
-                          ),
-                        )
-                        : Container(),
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: Image.network(
-                                      'https://yt3.googleusercontent.com/wVJk5uLYiKqPT5_Ucz5gxGJxMVdIHG1TDz5HXrlRR_JSRpMyhxOvQJzqy91XidLXH0Z6cfZyfMQ=s900-c-k-c0x00ffffff-no-rj',
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  'Tien Phong',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              'Người dân trở lại Thủ đô sau lễ, cửa ngõ phía Nam ùn ứ, nội đô thông thoáng',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              maxLines: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    _buildProgressBar(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    return Scaffold(
+      backgroundColor: Colors.black,
+
+      body: PageView.builder(
+        scrollDirection: Axis.vertical,
+        controller: _pageController,
+        itemCount: videoItems.length,
+        onPageChanged: (index) {
+          setState(() => _currentIndex = index);
+        },
+        itemBuilder: (context, index) {
+          return ReelVideoPlayer(
+            videoItem: videoItems[index],
+            play: _currentIndex == index,
+          );
+        },
+      ),
     );
   }
 }
