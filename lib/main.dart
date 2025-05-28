@@ -53,7 +53,9 @@ class _BottomNavigationProject extends State<BottomNavigationProject> {
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Tin tức'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt ),
+            label: 'Tin tức'),
           BottomNavigationBarItem(
             icon: Icon(Icons.trending_up),
             label: 'Xu hướng',
@@ -63,6 +65,7 @@ class _BottomNavigationProject extends State<BottomNavigationProject> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
+        iconSize: 25,
         onTap: _onItemTapped,
         backgroundColor: _selectedIndex == 1 ? Colors.black : Colors.white,
       ),
