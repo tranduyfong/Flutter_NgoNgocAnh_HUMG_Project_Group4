@@ -18,7 +18,7 @@ class _HotWidgetState extends State<HotWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder<List<List<dynamic>>>(
       future: Future.wait([
-        dataService.getAllData(),
+        dataService.getHotCategories(),
         dataService.getArticleManyReads(),
       ]),
       builder: (context, snapshot) {

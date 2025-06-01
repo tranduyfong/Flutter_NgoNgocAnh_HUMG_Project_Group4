@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/models/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class ReadingNews extends StatefulWidget {
   final int idBao;
@@ -17,6 +18,7 @@ class ReadingNews extends StatefulWidget {
 }
 
 class _ReadingNews extends State<ReadingNews> {
+  FlutterTts flutterTts = FlutterTts();
   final DataService dataService = DataService();
   bool userIsLoggedIn = false;
   double fontSize = 24.0;
@@ -39,6 +41,18 @@ class _ReadingNews extends State<ReadingNews> {
     setState(() {
       userIsLoggedIn = isLoggedIn && token != null && token.isNotEmpty;
     });
+  }
+
+  Future<void> speak(String text) async {
+    await flutterTts.setLanguage('vi-VN');
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setVolume(1.0);
+
+    await flutterTts.speak(text);
+  }
+
+  Future<void> stopSpeaking() async {
+    await flutterTts.stop();
   }
 
   void _loadLikedStatus() async {
@@ -273,12 +287,22 @@ class _ReadingNews extends State<ReadingNews> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  child: Text(
-                    data[0]['TieuDeBao'],
-                    style: TextStyle(
-                      fontSize: fontSize + 2,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        data[0]['TieuDeBao'],
+                        style: TextStyle(
+                          fontSize: fontSize + 2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await speak(data[0]['TieuDeBao']);
+                        },
+                        icon: Icon(Icons.volume_down_rounded),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
