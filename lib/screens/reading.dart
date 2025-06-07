@@ -24,6 +24,8 @@ class _ReadingNews extends State<ReadingNews> {
   double fontSize = 24.0;
   bool isLiked = false;
   bool isSpeaking = false;
+  double voiceVolume = 1.5;
+  double voiceSpeed = 0.4;
 
   @override
   void initState() {
@@ -52,8 +54,8 @@ class _ReadingNews extends State<ReadingNews> {
 
   Future<void> speak(String text) async {
     await flutterTts.setLanguage('vi-VN');
-    await flutterTts.setSpeechRate(0.4);
-    await flutterTts.setVolume(1.5);
+    await flutterTts.setSpeechRate(voiceSpeed);
+    await flutterTts.setVolume(voiceVolume);
 
     setState(() {
       isSpeaking = true;
@@ -133,111 +135,122 @@ class _ReadingNews extends State<ReadingNews> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder:
-          (context) => Container(
-            width: double.infinity,
-            height: 270,
-            padding: EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            'Tùy chỉnh',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        Divider(
-                          height: 1,
-                          color: const Color.fromARGB(255, 230, 229, 229),
-                        ),
-                      ],
-                    ),
+      isScrollControlled: true,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Tùy chỉnh',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          child: Column(
-                            children: [
-                              Text('Cỡ chữ'),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(9, 92, 92, 92),
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(10),
-                                    bottom: Radius.circular(10),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          fontSize -= 2;
-                                        });
-                                      },
-                                      icon: Icon(Icons.text_decrease),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          fontSize += 2;
-                                        });
-                                      },
-                                      icon: Icon(Icons.text_increase),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 1,
-                          color: const Color.fromARGB(255, 230, 229, 229),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        'Đóng',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
-                        ),
+                  Divider(),
+                  SizedBox(height: 10),
+                  // Font size adjustment
+                  Text('Cỡ chữ'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.text_decrease),
+                        onPressed: () {
+                          setModalState(
+                            () => fontSize = (fontSize - 2).clamp(12.0, 50.0),
+                          );
+                          setState(() {});
+                        },
                       ),
-                    ),
+                      Text('${fontSize.toStringAsFixed(0)}'),
+                      IconButton(
+                        icon: Icon(Icons.text_increase),
+                        onPressed: () {
+                          setModalState(
+                            () => fontSize = (fontSize + 2).clamp(12.0, 50.0),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                  SizedBox(height: 10),
+                  // Volume adjustment
+                  Text('Âm lượng giọng đọc'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.volume_down),
+                        onPressed: () {
+                          setModalState(
+                            () =>
+                                voiceVolume = (voiceVolume - 0.2).clamp(
+                                  0.0,
+                                  1.0,
+                                ),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      Text('${voiceVolume.toStringAsFixed(1)}'),
+                      IconButton(
+                        icon: Icon(Icons.volume_up),
+                        onPressed: () {
+                          setModalState(
+                            () =>
+                                voiceVolume = (voiceVolume + 0.2).clamp(
+                                  0.0,
+                                  1.0,
+                                ),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  // Speed adjustment
+                  Text('Tốc độ giọng đọc'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_downward),
+                        onPressed: () {
+                          setModalState(
+                            () =>
+                                voiceSpeed = (voiceSpeed - 0.1).clamp(0.1, 1.0),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      Text('${voiceSpeed.toStringAsFixed(1)}'),
+                      IconButton(
+                        icon: Icon(Icons.arrow_upward),
+                        onPressed: () {
+                          setModalState(
+                            () =>
+                                voiceSpeed = (voiceSpeed + 0.1).clamp(0.1, 1.0),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text('Đóng', style: TextStyle(color: Colors.grey)),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -275,7 +288,7 @@ class _ReadingNews extends State<ReadingNews> {
             child: IconButton(
               onPressed: () => showDialogToChangeSizeText(),
               icon: Icon(
-                Icons.format_size,
+                Icons.settings,
                 color: const Color.fromARGB(255, 88, 87, 87),
               ),
             ),
