@@ -23,6 +23,7 @@ class _ReadingNews extends State<ReadingNews> {
   bool userIsLoggedIn = false;
   double fontSize = 24.0;
   bool isLiked = false;
+  bool isSpeaking = false;
 
   @override
   void initState() {
@@ -30,6 +31,12 @@ class _ReadingNews extends State<ReadingNews> {
     _checkLoginStatus();
     _loadLikedStatus();
     _upViewArticle();
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        isSpeaking = false;
+      });
+    });
   }
 
   // The function to check logged
@@ -45,14 +52,21 @@ class _ReadingNews extends State<ReadingNews> {
 
   Future<void> speak(String text) async {
     await flutterTts.setLanguage('vi-VN');
-    await flutterTts.setSpeechRate(0.5);
-    await flutterTts.setVolume(1.0);
+    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.setVolume(1.5);
+
+    setState(() {
+      isSpeaking = true;
+    });
 
     await flutterTts.speak(text);
   }
 
   Future<void> stopSpeaking() async {
     await flutterTts.stop();
+    setState(() {
+      isSpeaking = false;
+    });
   }
 
   void _loadLikedStatus() async {
@@ -286,7 +300,7 @@ class _ReadingNews extends State<ReadingNews> {
             return ListView(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child: Column(
                     children: [
                       Text(
@@ -295,12 +309,6 @@ class _ReadingNews extends State<ReadingNews> {
                           fontSize: fontSize + 2,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          await speak(data[0]['TieuDeBao']);
-                        },
-                        icon: Icon(Icons.volume_down_rounded),
                       ),
                     ],
                   ),
@@ -317,7 +325,39 @@ class _ReadingNews extends State<ReadingNews> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(10, 30, 0, 0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          if (isSpeaking) {
+                            await stopSpeaking();
+                          } else {
+                            await speak(
+                              '${data[0]['TieuDeBao'] ?? ''}, ${data[0]['GioiThieu'] ?? ''}, ${data[0]['NoiDung'] ?? ''}',
+                            );
+                          }
+                        },
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle
+                              : Icons.volume_up_rounded,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        'Bấm vào đây để nghe bài báo',
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Colors.grey,
+                          fontSize: fontSize - 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                   child: Text(
                     data[0]['GioiThieu'],
                     style: TextStyle(
