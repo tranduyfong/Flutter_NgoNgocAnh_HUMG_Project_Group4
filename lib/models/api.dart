@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://192.168.1.29:3000';
+  static final String baseUrl = 'http://localhost:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {
@@ -420,6 +420,99 @@ class DataService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getDataVideoReels() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/video'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getQuantityLikesVideo(int idVideo) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/quantity/$idVideo'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  Future<bool> checkLikedVideo(int idVideo) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('jwtToken');
+
+    if (token == null) {
+      return false;
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/checkLikedVideo/$idVideo'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data is List && data.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  // API to remove video in database
+  static Future<Map<String, dynamic>> deleteVideoFavourite(int idVideo) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('jwtToken');
+
+    final response = await http.delete(
+      Uri.parse('$baseUrl/video/favourite/$idVideo/delete'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  // API to add new video in database
+  static Future<Map<String, dynamic>> addVideoFavourite(int idVideo) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('jwtToken');
+    if (token == null || token.isEmpty) {
+      throw Exception('can not find token');
+    }
+
+    final response = await http.post(
+      Uri.parse('$baseUrl/video/favourite/$idVideo/like'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error...');
     }
   }
 }

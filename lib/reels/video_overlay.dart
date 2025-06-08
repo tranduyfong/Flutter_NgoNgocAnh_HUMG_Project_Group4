@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 class VideoOverlay extends StatelessWidget {
+  final int idVideo;
   final String avatarUrl;
   final String name;
   final String description;
@@ -11,6 +12,7 @@ class VideoOverlay extends StatelessWidget {
 
   const VideoOverlay({
     super.key,
+    required this.idVideo,
     required this.avatarUrl,
     required this.name,
     required this.description,

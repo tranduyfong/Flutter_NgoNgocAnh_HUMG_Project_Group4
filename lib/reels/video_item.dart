@@ -1,5 +1,6 @@
 // video_item.dart
 class VideoItem {
+  final int idVideo;
   final String videoUrl;
   final String avatarUrl;
   final String name;
@@ -8,6 +9,7 @@ class VideoItem {
   final bool isLiked;
 
   VideoItem({
+    required this.idVideo,
     required this.videoUrl,
     required this.avatarUrl,
     required this.name,
@@ -18,6 +20,7 @@ class VideoItem {
 
   VideoItem copyWith({int? likes, bool? isLiked}) {
     return VideoItem(
+      idVideo: idVideo,
       videoUrl: videoUrl,
       avatarUrl: avatarUrl,
       name: name,

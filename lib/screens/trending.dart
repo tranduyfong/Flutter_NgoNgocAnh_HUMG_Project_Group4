@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_group4/models/api.dart';
 import 'package:flutter_project_group4/reels/reel_video.dart';
 import 'package:flutter_project_group4/reels/video_item.dart';
 
@@ -10,36 +11,42 @@ class TrendingScreen extends StatefulWidget {
 }
 
 class _TrendingScreenState extends State<TrendingScreen> {
+  DataService dataService = DataService();
   late PageController _pageController;
   int _currentIndex = 0;
-
-  final List<VideoItem> videoItems = [
-    VideoItem(
-      videoUrl:
-          'https://streaming-cms-tpo.epicdn.me/b3c194cb296e2ab7a36583c1a08d5a46/6831fb10/2025_05_23/giang_thanh_01_1732.mp4',
-      avatarUrl: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-      name: 'NHỊP SỐNG 24',
-      description:
-          'Chuyên gia nói gì về việc nhiều người trẻ chọn trút nỗi lòng với AI?',
-      likes: 200,
-      isLiked: false,
-    ),
-    VideoItem(
-      videoUrl:
-          'https://streaming-cms-tpo.epicdn.me/b944e5526c6290ef008ff56bd416aaa1/6831fb10/2025_05_23/viettel_9317.mp4',
-      avatarUrl: 'https://cdn-icons-png.flaticon.com/512/847/847969.png',
-      name: 'TIN NHANH',
-      description:
-          'Lòng xe điếu hiếm, nếu bị "phù phép" sẽ nguy hiểm như thế nào?',
-      likes: 850,
-      isLiked: false,
-    ),
-  ];
+  List<VideoItem> videoItems = []; // Khởi tạo list videoItems rỗng
+  bool _isLoading = true;
 
   @override
   void initState() {
     _pageController = PageController();
+    _fetchData(); // Gọi hàm để fetch data từ API
     super.initState();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      final List<dynamic> data = await dataService.getDataVideoReels();
+      final videos =
+          data
+              .map(
+                (json) => VideoItem(
+                  idVideo: json['idVideo'],
+                  videoUrl: json['video_path'],
+                  avatarUrl: json['img_path_logo'],
+                  name: json['TenTacGia'],
+                  description: json['TieuDe'],
+                  likes: json['likes'],
+                ),
+              )
+              .toList();
+      setState(() {
+        videoItems = videos;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
   }
 
   @override
@@ -52,7 +59,6 @@ class _TrendingScreenState extends State<TrendingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
       body: PageView.builder(
         scrollDirection: Axis.vertical,
         controller: _pageController,
