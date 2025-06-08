@@ -1,7 +1,7 @@
 const express = require('express');
 const { authMiddleWare } = require('../middleware/jwtMiddleware')
 const router = express.Router();
-const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories } = require('../services/CRUDServices');
+const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories, getDataVideoReels, checkLikedVideo, addVideoFavourite, deleteVideoFavourite } = require('../services/CRUDServices');
 
 router.get('/', getAllDatas);
 router.get('/getNews/:idBao', getNews);
@@ -21,13 +21,18 @@ router.post('/get/list/find', getListArticleFind);
 router.put('/update/view/:idBao', updateTheView);
 router.get('/get/articleManyReads', getArticleManyReads);
 
-router.get('/get/hot', getHotCategories)
-router.get('/get/new', getNewCategories)
-router.get('/get/vietnamfootball', getVietNamFootballCategories)
-router.get('/get/international', getInternationalFootballCategories)
-router.get('/get/docvala', getDocLaCategories)
-router.get('/get/loved', getLovedCategories)
-router.get('/get/entertaiment', getEntertaimentCategories)
-router.get('/get/world', getWorldCategories)
-router.get('/get/law', getLawCategories)
+router.get('/get/hot', getHotCategories);
+router.get('/get/new', getNewCategories);
+router.get('/get/vietnamfootball', getVietNamFootballCategories);
+router.get('/get/international', getInternationalFootballCategories);
+router.get('/get/docvala', getDocLaCategories);
+router.get('/get/loved', getLovedCategories);
+router.get('/get/entertaiment', getEntertaimentCategories);
+router.get('/get/world', getWorldCategories);
+router.get('/get/law', getLawCategories);
+
+router.get('/get/video', getDataVideoReels);
+router.get('/checkLikedVideo/:idVideo', authMiddleWare, checkLikedVideo);
+router.post('/video/favourite/:idVideo/like', authMiddleWare, addVideoFavourite);
+router.delete('/video/favourite/:idVideo/delete', authMiddleWare, deleteVideoFavourite);
 module.exports = router;

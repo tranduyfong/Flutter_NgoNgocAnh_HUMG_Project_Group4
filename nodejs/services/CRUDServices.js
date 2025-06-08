@@ -203,4 +203,36 @@ const getLawCategories = async (req, res) => {
     res.json(results);
 }
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories }
+const getDataVideoReels = async (req, res) => {
+    let [results, fields] = await connection.query('SELECT Video.idVideo, Video.video_path, Video.TieuDe, TacGia.TenTacGia, TacGia.img_path_logo, COUNT(yt.idVideo) AS likes FROM Video JOIN TacGia ON Video.idTacGia = TacGia.idTacGia LEFT JOIN YeuThichVideo yt ON yt.idVideo = Video.idVideo GROUP BY Video.idVideo, Video.video_path, Video.TieuDe, TacGia.TenTacGia, TacGia.img_path_logo');
+    res.json(results);
+}
+
+// API for check user have liked some article
+const checkLikedVideo = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idVideo = req.params.idVideo;
+
+    let [results, fields] = await connection.query('SELECT * FROM YeuThichVideo WHERE idNguoiDung = ? AND idVideo = ?', [idNguoiDung, idVideo]);
+    res.json(results);
+}
+
+// API for do liked some article
+const addVideoFavourite = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idVideo = req.params.idVideo;
+
+    await connection.query('INSERT INTO YeuThichVideo VALUES (?, ?)', [idVideo, idNguoiDung]);
+    res.json({ success: true });
+}
+
+// API for delete some favourite article
+const deleteVideoFavourite = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
+    const idVideo = req.params.idVideo;
+
+    await connection.query('DELETE FROM YeuThichVideo WHERE idNguoiDung = ? AND idVideo = ?', [idNguoiDung, idVideo]);
+    res.json({ success: true });
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories, getDataVideoReels, checkLikedVideo, deleteVideoFavourite, addVideoFavourite }
