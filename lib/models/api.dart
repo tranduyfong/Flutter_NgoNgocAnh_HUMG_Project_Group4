@@ -435,18 +435,6 @@ class DataService {
     }
   }
 
-  Future<List<dynamic>> getQuantityLikesVideo(int idVideo) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/get/quantity/$idVideo'),
-      headers: {'Content-Type': 'application/json'},
-    );
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Không thể tải dữ liệu');
-    }
-  }
-
   Future<bool> checkLikedVideo(int idVideo) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('jwtToken');
@@ -513,6 +501,85 @@ class DataService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Error...');
+    }
+  }
+
+  Future<Map<String, dynamic>> addNewVideo(
+    String tieuDe,
+    String linkVideo,
+    int tacGia,
+  ) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/create/video'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'tieuDe': tieuDe,
+        'video_path': linkVideo,
+        'tacGia': tacGia,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteVideo(int idVideo) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/delete/video/$idVideo'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteVideoFavouriteAfterDeleteVideo(
+    int idVideo,
+  ) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/delete/videoFavourite/$idVideo'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  // API to get data some article
+  Future<List<dynamic>> getDataSomeVideo(int idVideo) async {
+    final response = await http.get(Uri.parse('$baseUrl/getVideo/$idVideo'));
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Không thể tải dữ liệu');
+    }
+  }
+
+  Future<Map<String, dynamic>> editVideo(
+    String tieuDe,
+    String linkVideo,
+    int tacGia,
+    int idVideo,
+  ) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/update/video/$idVideo'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'TieuDe': tieuDe,
+        'video_path': linkVideo,
+        'idTacGia': tacGia,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
     }
   }
 }

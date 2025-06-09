@@ -3,6 +3,7 @@ import 'package:flutter_project_group4/main.dart';
 import 'package:flutter_project_group4/models/api.dart';
 import 'package:flutter_project_group4/screens/favourites.dart';
 import 'package:flutter_project_group4/screens/listtitle.dart';
+import 'package:flutter_project_group4/screens/listvideo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyAccountScreen extends StatefulWidget {
@@ -68,30 +69,61 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     if (isAdmin == 1) {
       return Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Row(
+        child: Column(
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ListTitleScreens(),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ListTitleScreens(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.list, size: 30, color: Colors.blue),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ListTitleScreens(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Danh sách bài báo',
+                    style: TextStyle(color: Colors.blue),
                   ),
-                );
-              },
-              icon: Icon(Icons.list, size: 30, color: Colors.blue),
+                ),
+              ],
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ListTitleScreens(),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ListTitleScreens(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.list, size: 30, color: Colors.blue),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ListVideoScreens(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Danh sách video reels',
+                    style: TextStyle(color: Colors.blue),
                   ),
-                );
-              },
-              child: Text(
-                'Danh sách bài báo',
-                style: TextStyle(color: Colors.blue),
-              ),
+                ),
+              ],
             ),
           ],
         ),

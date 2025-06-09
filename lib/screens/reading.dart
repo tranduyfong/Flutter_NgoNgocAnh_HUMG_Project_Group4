@@ -164,7 +164,7 @@ class _ReadingNews extends State<ReadingNews> {
                           setState(() {});
                         },
                       ),
-                      Text('${fontSize.toStringAsFixed(0)}'),
+                      Text(fontSize.toStringAsFixed(0)),
                       IconButton(
                         icon: Icon(Icons.text_increase),
                         onPressed: () {
@@ -195,7 +195,7 @@ class _ReadingNews extends State<ReadingNews> {
                           setState(() {});
                         },
                       ),
-                      Text('${voiceVolume.toStringAsFixed(1)}'),
+                      Text(voiceVolume.toStringAsFixed(1)),
                       IconButton(
                         icon: Icon(Icons.volume_up),
                         onPressed: () {
@@ -227,7 +227,7 @@ class _ReadingNews extends State<ReadingNews> {
                           setState(() {});
                         },
                       ),
-                      Text('${voiceSpeed.toStringAsFixed(1)}'),
+                      Text(voiceSpeed.toStringAsFixed(1)),
                       IconButton(
                         icon: Icon(Icons.arrow_upward),
                         onPressed: () {
