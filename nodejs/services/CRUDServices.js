@@ -271,5 +271,11 @@ const updateVideo = async (req, res) => {
     res.json({ message: 'Sửa bài báo thành công' });
 }
 
+const getListVideoFavourites = async (req, res) => {
+    const idNguoiDung = req.user.idNguoiDung;
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories, getDataVideoReels, checkLikedVideo, deleteVideoFavourite, addVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo }
+    let [results, fields] = await connection.query('SELECT * FROM YeuThichVideo INNER JOIN Video ON YeuThichVideo.idVideo = Video.idVideo INNER JOIN TacGia ON Video.idTacGia = TacGia.idTacGia WHERE idNguoiDung = ?', [idNguoiDung]);
+    res.json(results);
+}
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories, getDataVideoReels, checkLikedVideo, deleteVideoFavourite, addVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo, getListVideoFavourites }

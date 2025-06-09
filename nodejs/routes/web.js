@@ -1,7 +1,7 @@
 const express = require('express');
 const { authMiddleWare } = require('../middleware/jwtMiddleware')
 const router = express.Router();
-const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories, getDataVideoReels, checkLikedVideo, addVideoFavourite, deleteVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo } = require('../services/CRUDServices');
+const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories, getDataVideoReels, checkLikedVideo, addVideoFavourite, deleteVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo, getListVideoFavourites } = require('../services/CRUDServices');
 
 router.get('/', getAllDatas);
 router.get('/getNews/:idBao', getNews);
@@ -40,4 +40,5 @@ router.delete('/delete/video/:idVideo', deleteVideo);
 router.delete('/delete/videoFavourite/:idVideo', deleteVideoFavouriteAfterDeleteVideo);
 router.get('/getVideo/:idVideo', getVideoData);
 router.put('/update/video/:idVideo', updateVideo);
+router.get('/get/list/favourites/video', authMiddleWare, getListVideoFavourites);
 module.exports = router;
