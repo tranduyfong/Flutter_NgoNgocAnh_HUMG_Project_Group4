@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_group4/main.dart';
 import 'package:flutter_project_group4/models/api.dart';
 import 'package:flutter_project_group4/screens/favourites.dart';
+import 'package:flutter_project_group4/screens/favouritevideo.dart';
 import 'package:flutter_project_group4/screens/listtitle.dart';
 import 'package:flutter_project_group4/screens/listvideo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -131,31 +132,74 @@ class _MyAccountScreen extends State<MyAccountScreen> {
     } else {
       return Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Row(
+        child: Column(
           children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const FavouritesScreen(),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const FavouritesScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.favorite, size: 30, color: Colors.red),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (userIsLoggedIn == false) {
+                      showDialogToRequestLogin();
+                    } else {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const FavouritesScreen(),
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Bài báo đã thích',
+                    style: TextStyle(color: Colors.red),
                   ),
-                );
-              },
-              icon: Icon(Icons.favorite, size: 30, color: Colors.red),
+                ),
+              ],
             ),
-            TextButton(
-              onPressed: () {
-                if (userIsLoggedIn == false) {
-                  showDialogToRequestLogin();
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const FavouritesScreen(),
-                    ),
-                  );
-                }
-              },
-              child: Text('Đã thích', style: TextStyle(color: Colors.red)),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const FavouritesScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.video_collection,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (userIsLoggedIn == false) {
+                      showDialogToRequestLogin();
+                    } else {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder:
+                              (context) => const ListVideoFavouriteScreens(),
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Video đã thích',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

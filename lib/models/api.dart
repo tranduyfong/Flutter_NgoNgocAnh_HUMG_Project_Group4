@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataService {
-  static final String baseUrl = 'http://localhost:3000';
+  static final String baseUrl = 'http://192.168.10.39:3000';
 
   // API to get all data of new
   Future<List<dynamic>> getAllData() async {
@@ -576,6 +576,25 @@ class DataService {
         'idTacGia': tacGia,
       }),
     );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Loi van de');
+    }
+  }
+
+  Future<List<dynamic>> getVideoFavouritesList() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('jwtToken');
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/get/list/favourites/video'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
