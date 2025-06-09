@@ -235,4 +235,41 @@ const deleteVideoFavourite = async (req, res) => {
     res.json({ success: true });
 }
 
-module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories, getDataVideoReels, checkLikedVideo, deleteVideoFavourite, addVideoFavourite }
+const createVideo = async (req, res) => {
+    const { tieuDe, video_path, tacGia } = req.body;
+
+    let [results, fields] = await connection.query('INSERT INTO Video(TieuDe, video_path, idTacGia) VALUES (?, ?, ?)', [tieuDe, video_path, tacGia]);
+    res.json({ message: 'Tạo video thành công' });
+}
+
+const deleteVideo = async (req, res) => {
+    const idVideo = req.params.idVideo;
+
+    await connection.query('DELETE FROM Video WHERE idVideo = ?', [idVideo]);
+    res.json({ success: true });
+}
+
+const deleteVideoFavouriteAfterDeleteVideo = async (req, res) => {
+    const idVideo = req.params.idVideo;
+
+    await connection.query('DELETE FROM YeuThichVideo WHERE idVideo = ?', [idVideo]);
+    res.json({ success: true });
+}
+
+// API for get a news
+const getVideoData = async (req, res) => {
+    const idVideo = req.params.idVideo;
+    let [results, fields] = await connection.query('SELECT * FROM Video WHERE idVideo = ?', [idVideo]);
+    res.json(results);
+}
+
+const updateVideo = async (req, res) => {
+    const idVideo = req.params.idVideo;
+    const { TieuDe, video_path, idTacGia } = req.body;
+
+    let [results, fields] = await connection.query('UPDATE Video SET TieuDe = ?, video_path = ?, idTacGia = ? WHERE idVideo = ?', [TieuDe, video_path, idTacGia, idVideo]);
+    res.json({ message: 'Sửa bài báo thành công' });
+}
+
+
+module.exports = { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getDocLaCategories, getHotCategories, getNewCategories, getLawCategories, getWorldCategories, getEntertaimentCategories, getLovedCategories, getVietNamFootballCategories, getInternationalFootballCategories, getDataVideoReels, checkLikedVideo, deleteVideoFavourite, addVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo }

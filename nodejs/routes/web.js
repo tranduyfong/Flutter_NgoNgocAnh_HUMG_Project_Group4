@@ -1,7 +1,7 @@
 const express = require('express');
 const { authMiddleWare } = require('../middleware/jwtMiddleware')
 const router = express.Router();
-const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories, getDataVideoReels, checkLikedVideo, addVideoFavourite, deleteVideoFavourite } = require('../services/CRUDServices');
+const { getAllDatas, getNews, addArticleFavourite, login, checkLikedArticle, deleteArticleFavourite, getUserData, createAccount, checkExistAccount, createArtical, deleteArticle, updateArticle, getListArticleFavourites, getListArticleFind, deleteArticleFavouriteAfterDeleteArticle, updateTheView, getArticleManyReads, getHotCategories, getVietNamFootballCategories, getNewCategories, getInternationalFootballCategories, getDocLaCategories, getLovedCategories, getEntertaimentCategories, getWorldCategories, getLawCategories, getDataVideoReels, checkLikedVideo, addVideoFavourite, deleteVideoFavourite, createVideo, deleteVideo, deleteVideoFavouriteAfterDeleteVideo, getVideoData, updateVideo } = require('../services/CRUDServices');
 
 router.get('/', getAllDatas);
 router.get('/getNews/:idBao', getNews);
@@ -35,4 +35,9 @@ router.get('/get/video', getDataVideoReels);
 router.get('/checkLikedVideo/:idVideo', authMiddleWare, checkLikedVideo);
 router.post('/video/favourite/:idVideo/like', authMiddleWare, addVideoFavourite);
 router.delete('/video/favourite/:idVideo/delete', authMiddleWare, deleteVideoFavourite);
+router.post('/create/video', createVideo);
+router.delete('/delete/video/:idVideo', deleteVideo);
+router.delete('/delete/videoFavourite/:idVideo', deleteVideoFavouriteAfterDeleteVideo);
+router.get('/getVideo/:idVideo', getVideoData);
+router.put('/update/video/:idVideo', updateVideo);
 module.exports = router;
