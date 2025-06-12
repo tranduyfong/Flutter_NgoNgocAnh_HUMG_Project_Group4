@@ -31,8 +31,6 @@ class _TinhYeuWidget extends State<TinhYeuWidget> {
             }
             return ListView.builder(
               itemCount: data.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

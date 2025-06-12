@@ -69,8 +69,6 @@ class _ListTitleScreens extends State<ListTitleScreens> {
             final data = snapshot.data!;
             return ListView.builder(
               itemCount: data.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

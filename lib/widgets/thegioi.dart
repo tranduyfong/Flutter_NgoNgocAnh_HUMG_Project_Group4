@@ -31,8 +31,6 @@ class _TheGioiWidget extends State<TheGioiWidget> {
             }
             return ListView.builder(
               itemCount: data.length,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
