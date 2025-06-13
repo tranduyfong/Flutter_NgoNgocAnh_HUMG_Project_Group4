@@ -118,14 +118,6 @@ class _ListVideoFavouriteScreens extends State<ListVideoFavouriteScreens> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (context) => const CreateVideo()));
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
