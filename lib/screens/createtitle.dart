@@ -221,18 +221,27 @@ class _CreateTitleState extends State<CreateTitle> {
                     ),
                   ),
                   onPressed: () async {
-                    dataService.addNewArticle(
-                      tieuDeBaoController.text,
-                      gioiThieuController.text,
-                      imgPathController.text,
-                      noiDungController.text,
-                      selectedAuthor!,
-                      selectedCategories!,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Tạo bài báo thành công.')),
-                    );
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    if (tieuDeBaoController.text.isEmpty ||
+                        gioiThieuController.text.isEmpty ||
+                        imgPathController.text.isEmpty ||
+                        noiDungController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Vui lòng nhập đủ thông tin.')),
+                      );
+                    } else {
+                      dataService.addNewArticle(
+                        tieuDeBaoController.text,
+                        gioiThieuController.text,
+                        imgPathController.text,
+                        noiDungController.text,
+                        selectedAuthor!,
+                        selectedCategories!,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Tạo bài báo thành công.')),
+                      );
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    }
                   },
                   child: Text(
                     'Thêm',

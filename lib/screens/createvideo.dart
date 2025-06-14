@@ -155,15 +155,22 @@ class _CreateVideo extends State<CreateVideo> {
                     ),
                   ),
                   onPressed: () async {
-                    await dataService.addNewVideo(
-                      tieuDeVideoController.text,
-                      videoPathController.text,
-                      selectedAuthor!,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Tạo video thành công.')),
-                    );
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    if (tieuDeVideoController.text.isEmpty ||
+                        videoPathController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Vui lòng nhập đủ thông tin.')),
+                      );
+                    } else {
+                      await dataService.addNewVideo(
+                        tieuDeVideoController.text,
+                        videoPathController.text,
+                        selectedAuthor!,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Tạo video thành công.')),
+                      );
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    }
                   },
                   child: Text(
                     'Thêm',
