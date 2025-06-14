@@ -3,7 +3,7 @@ const { tokenLogin } = require('../middleware/jwtMiddleware');
 
 // API for get all datas
 const getAllDatas = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia ORDER BY NgayDang DESC');
     res.json(results);
 }
 
@@ -129,7 +129,7 @@ const getListArticleFind = async (req, res) => {
     try {
         const noiDung = req.body.noiDung;
         const [results, fields] = await connection.query(
-            'SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE TieuDeBao LIKE ?',
+            'SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE TieuDeBao LIKE ? ORDER BY NgayDang DESC',
             [`%${noiDung}%`]
         );
         res.json(results);
@@ -159,47 +159,47 @@ const getArticleManyReads = async (req, res) => {
 }
 
 const getHotCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 1');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 1 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getNewCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 2');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 2 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getVietNamFootballCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 3');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 3 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getInternationalFootballCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 4');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 4 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getDocLaCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 5');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 5 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getLovedCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 6');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 6 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getEntertaimentCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 7');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 7 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getWorldCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 8');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 8 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
 const getLawCategories = async (req, res) => {
-    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 9');
+    let [results, fields] = await connection.query('SELECT * FROM BaiBao JOIN TacGia ON BaiBao.idTacGia = TacGia.idTacGia WHERE idDanhMuc = 9 ORDER BY NgayDang DESC');
     res.json(results);
 }
 
